@@ -1,0 +1,13 @@
+<div>
+  <h1 class="page-header">Empresas</h1>
+  
+  <div>
+    <div ng-repeat="empresa in empresas.todas">
+      <h3>{{empresa.RazaoSocial}}</h3>
+      <a data-ui-sref="empresas.editar({id: empresa.Id})">Editar</a>
+    </div>
+  </div>
+
+  <ui-view></ui-view>
+
+</div>
