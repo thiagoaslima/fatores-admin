@@ -23,6 +23,8 @@
 		var arraySlice = Array.prototype.slice;
 		var hasOwnProperty = Object.prototype.hasOwnProperty;
 
+
+
 		/*
 		 * type check
 		 * --------------------------------------------------------
@@ -50,12 +52,32 @@
 			return toString.call(
 				value) === '[object Function]' || typeof value === 'function';
 		};
+		
+		// is a given value NaN?
+		is.nan = function (value) {    // NaN is number :) Also it is the only value which does not equal itself
+			return value !== value;
+		};
+
+		// is a given value null?
+		is.null = function (value) {
+			return value === null || toString.call(value) === '[object Null]';
+		};
+
+		// is a given value number?
+		is.number = function (value) {
+			return toString.call(value) === '[object Number]';
+		};
+
+		is.object = function (value) {
+			return toString.call(value) === "[object Object]";
+		};
+
+
 
 		/*
 		 * date check
 		 * --------------------------------------------------------
 		 */
-
 
 		is.date.formatted = function (value) {
 			return is.date(new Date(value));
@@ -70,6 +92,31 @@
 		};
 
 
+		/*
+		 * 
+		 * @param {type} func
+		 */
+
+		// has a given object got parameterized count property?
+		is.object.with = {};
+		is.object.with.properties = function (count, obj) {
+			if (!is.object(obj) || !is.number(count)) {
+				return false;
+			}
+			if (Object.keys) {
+				return Object.keys(obj).length === count;
+			}
+			var properties = [],
+				property;
+			for (property in obj) {
+				if (hasOwnProperty.call(obj, property)) {
+					properties.push(property);
+				}
+			}
+			return properties.length === count;
+		};
+
+		is.object.empty = is.object.with.properties.bind(null, 0);
 
 
 		/*

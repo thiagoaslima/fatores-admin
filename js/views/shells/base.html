@@ -1,0 +1,15 @@
+<div class="sidebar">
+  <ul class="lista-entidades">
+    <li class="entidade" ng-repeat="entidade in ::entidades">
+      <a data-ui-sref-active="active" data-ui-sref="model({model: entidade.Href.toLowerCase(), id: null})">{{::entidade.Nome}}</a>
+    </li>
+  </ul>
+</div>
+
+<div class="messages">
+  <div class="msg msg-sucesso" ng-if="!!sucesso">{{sucesso}}</div>
+  <div class="msg msg-erro" ng-if="!!erro">{{erro}}</div>
+</div>
+
+<div data-ui-view="model"></div>
+<div data-ui-view="submodel"></div>

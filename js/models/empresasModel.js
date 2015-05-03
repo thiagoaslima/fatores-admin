@@ -1,11 +1,15 @@
 ;
 (function (angular, undefined) {
 	'use strict';
+
 	angular
 		.module('app.models')
-		.factory('Empresa', ['Entidade', empresa]);
+		.factory('empresasModel', [
+			'Entidade',
+			model
+		]);
 
-	function empresa(Entidade) {
+	function model(Entidade) {
 
 		function Empresa(obj) {
 			Entidade.call(this, obj);
@@ -13,8 +17,8 @@
 			this.RazaoSocial = '';
 			this.CNPJ = '';
 			this.Endereco = '';
-			this.EnderecoNumero = '';
-			this.EnderecoComplemento = '';
+			this.EnderecoNumero = null;
+			this.EnderecoComplemento = null;
 			this.EnderecoLocalidade = '';
 			this.EnderecoUF = "";
 			this.EnderecoCEP = '';
@@ -23,22 +27,22 @@
 			this.PorteEmpresaId = 0;
 			this.AreaAtuacaoId = 0;
 			this.Status = false;
-			this.UserId = "";
 			
+			
+			this.Tarefas = [];
+			this.SetoresAtuacao = [];
+			this.ServicosPrestado = [];
+			this.Obras = [];
+			this.ObrasContratada = [];
+			this.AtividadesEmpresa = [];
+			this.UsuariosAutorizados = [];
+
 			angular.extend(this, obj);
 			return this;
 		}
 
-		/*
-		 * prototype
-		 * ----------------------------------------------------------
-		 */
-
-		var API_ADDRESS = 'Empresas';
-		Entidade.bindAPI(Empresa.prototype, API_ADDRESS);
-
-		/////////////////////////////////////
-
 		return Empresa;
+
 	}
-})(window.angular);
+
+})(angular);

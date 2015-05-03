@@ -1,0 +1,173 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="empresas.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="empresas.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+  <form name="dadosEmpresa" id="dadosEmpresa" novalidate ng-submit="empresas.gravar()">
+
+
+    <!--Id-->
+
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+
+      <div class="inline-elements">
+	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="empresa.Status" /><label for="label_true">Ativa</label>
+	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="empresa.Status" /><label for="label_false">Inativa</label>
+      </div>
+    </div>
+
+
+    <!--RazaoSocial-->
+    <div class="form-group">
+      <label class="label__section" for="razaoSocial">Razão Social</label>
+      <input type="text" id="razaoSocial" name="razaoSocial" ng-model="empresa.RazaoSocial" />
+    </div>
+
+    <!--CNPJ-->
+    <div class="form-group">
+      <label class="label__section" for="cnpj">CNPJ</label>
+      <input type="text" id="cnpj" name="cnpj" ng-model="empresa.CNPJ" />
+    </div>
+
+    <!--Endereco-->
+    <div class="form-group">
+      <label class="label__section" for="endereco">Endereço</label>
+      <input type="text" id="endereco" name="endereco" ng-model="empresa.Endereco" />
+    </div>
+
+    <!--EnderecoNumero-->
+    <div class="form-group">
+      <label class="label__section" for="endereco">Número</label>
+      <input type="text" id="endereco" name="endereco" ng-model="empresa.EnderecoNumero" />
+    </div>
+
+    <!--EnderecoComplemento-->
+    <div class="form-group">
+      <label class="label__section" for="EnderecoComplemento">Complemento</label>
+      <input type="text" id="EnderecoComplemento" name="EnderecoComplemento" ng-model="empresa.EnderecoComplemento" />
+    </div>
+
+    <!--EnderecoLocalidade-->
+    <div class="form-group">
+      <label class="label__section" for="EnderecoLocalidade">Localidade</label>
+      <input type="text" id="EnderecoLocalidade" name="EnderecoLocalidade" ng-model="empresa.EnderecoLocalidade" />
+    </div>
+
+    <!--EnderecoUF-->
+    <div class="form-group">
+      <label class="label__section" for="EnderecoUF">UF</label>
+      <select ng-model="empresa.EnderecoUF" ng-options="estado.name as estado.name for estado in estados"></select>
+    </div>
+
+    <!--EnderecoCEP-->
+    <div class="form-group">
+      <label class="label__section" for="EnderecoCEP">Cep</label>
+      <input type="text" id="EnderecoCEP" name="EnderecoCEP" ng-model="empresa.EnderecoCEP" />
+    </div>
+
+    <!--QuantidadeFuncionarios-->
+    <div class="form-group">
+      <label class="label__section" for="QuantidadeFuncionarios">Quantidade de funcionarios</label>
+      <input type="number" id="QuantidadeFuncionarios" name="QuantidadeFuncionarios" ng-model="empresa.QuantidadeFuncionarios" />
+    </div>
+
+    <!--InformacoesComplementares-->
+    <div class="form-group">
+      <label class="label__section" for="InformacoesComplementares">Informacoes complementares</label>
+      <textarea id="InformacoesComplementares" name="InformacoesComplementares" ng-model="empresa.InformacoesComplementares"></textarea>
+    </div>
+
+    <!--AreaAtuacaoId-->
+    <div class="form-group">
+
+      <div class='inline-elements'>
+	<label class="label__section" for="AreaAtuacaoId">Área de atuação</label>
+	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'areasAtuacao'})">
+	  <svg class="form-icon">
+	  <use xlink:href="#edit" />
+	  </svg>
+	  <small>Editar Áreas de Atuação</small>
+	</a>
+      </div>
+
+      <div class='inline-elements' ng-repeat="area in areasAtuacao">
+	<input id="area_{{::area.Id}}" type="radio" name="areaAtuacaoId" ng-model="empresa.AreaAtuacaoId" ng-value="area.Id">
+	<label for="area_{{::area.Id}}">{{::area.Nome}}</label>
+      </div>
+
+    </div>
+
+    <!--PorteEmpresaId-->
+
+
+    <!--Obras-->
+    <div class="form-group">
+
+      <div class='inline-elements'>
+	<label class="label__section" for="obras">Obras</label>
+	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras'})">
+	  <svg class="form-icon">
+	  <use xlink:href="#edit" />
+	  </svg>
+	  <small>Editar Obras</small>
+	</a>
+      </div>
+
+      <ul class='parent' ng-repeat="obra in obras">
+	<li class='inline-elements'>
+	  <input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="obra.Id">
+	  <label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
+	</li>
+
+	<ul class="children" ng-if='obra.children' ng-repeat="child in obra.children">
+	  <li class='inline-elements'>
+	    <input id="obra_{{::child.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child.Id">
+	    <label for="obra_{{::child.Id}}">{{::child.Nome}}</label>
+	  </li>
+	</ul>
+
+      </ul>
+    </div>
+    
+    <!--Obras Contratada-->
+    <div class="form-group">
+
+      <div class='inline-elements'>
+	<label class="label__section" for="obras">Obras na qual a empresa é contratada</label>
+	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras'})">
+	  <svg class="form-icon">
+	  <use xlink:href="#edit" />
+	  </svg>
+	  <small>Editar Obras</small>
+	</a>
+      </div>
+
+      <ul class='parent' ng-repeat="obra in obras">
+	<li class='inline-elements'>
+	  <input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.ObrasContratada" checklist-value="obra.Id">
+	  <label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
+	</li>
+
+	<ul class="children" ng-if='obra.children' ng-repeat="child in obra.children">
+	  <li class='inline-elements'>
+	    <input id="obra_{{::child.Id}}" type="checkbox" name="obras" checklist-model="empresa.ObrasContratada" checklist-value="child.Id">
+	    <label for="obra_{{::child.Id}}">{{::child.Nome}}</label>
+	  </li>
+	</ul>
+
+      </ul>
+    </div>
+
+
+
+    <!--DataCriacao-->
+    <!--DataAtualizacao-->
+
+</div>
+
+</form>

@@ -1,0 +1,48 @@
+.modulo-edicao {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: stretch;
+    
+    overflow: hidden;
+    margin: 0;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.2);
+    flex: 1 1 auto;
+}
+
+.modulo-edicao__sidebar {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    flex: 0 0 auto;
+    
+    width: 12em;
+    border-right: 1px solid hsl(0, 0%, 100%);
+    background-color: rgba(0, 0, 0, 0.02);
+    box-shadow: 1px 0 0 hsl(0, 0%, 94%);
+    padding-left: 1em;
+}
+
+.modulo-edicao__formulario {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    flex: 1 0 auto;
+    overflow: hidden;
+}
+
+.modulo-edicao__topo {
+    display: flex;
+    padding: 0.75em 1em;
+    height: 3.5em;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    align-items: center;
+    flex-flow: row nowrap;
+    flex: 0 0 auto;
+}
+
+.modulo-edicao__corpo {
+    flex: 1 1 auto;
+    padding: 0.5em 1em;
+    /* max-height: 100%; */
+    overflow: auto;
+}

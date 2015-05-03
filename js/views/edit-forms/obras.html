@@ -1,0 +1,82 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="obras.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="obras.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+  
+  <form name="dadosObra" id="dadosObra" novalidate ng-submit="obras.gravar()">
+    <!--Id-->
+
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+      <input type="radio" id="status_true" name="status" ng-value="true" ng-model="obra.Status" /><label for="label_true">Ativa</label>
+      <input type="radio" id="status_false" name="status" ng-value="false" ng-model="obra.Status" /><label for="label_false">Inativa</label>
+    </div>
+
+
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="obra.Nome" />
+    </div>
+    
+    <!--Area Total Construida-->
+    <div class="form-group">
+      <label class="label__section" for="areatotal">Área total construída</label>
+      <input type="number" id="areatotal" name="areatotal" ng-model="obra.AreaTotalConstruida" />
+    </div>
+    
+    <!--VGV-->
+    <div class="form-group">
+      <label class="label__section" for="vgv">VGV</label>
+      <input type="number" id="vgv" name="vgv" ng-model="obra.VGV" />
+    </div>
+
+     <!--Descrição-->
+     <div class="form-group">
+      <label class="label__section" for="descricao">Descrição</label>
+      <input type="text" id="descricao" name="descricao" ng-model="obra.Descricao" />
+    </div>
+     
+     <!--Número Blocos-->
+     <div class="form-group">
+      <label class="label__section" for="numeroblocos">Número de blocos</label>
+      <input type="text" id="numeroblocos" name="numeroblocos" ng-model="obra.NumeroBlocos" />
+    </div>
+     
+     <!--Inicio Execução-->
+     <div class="form-group">
+      <label class="label__section" for="inicioexecucao">Início execução</label>
+      <input type="date" id="inicioexecucao" name="inicioexecucao" ng-model="obra.InicioExecucao" />
+    </div>
+     
+     <!--Fim Execução-->
+     <div class="form-group">
+      <label class="label__section" for="fimexecucao">Início execução</label>
+      <input type="date" id="fimexecucao" name="fimexecucao" ng-model="obra.FimExecucao" />
+    </div>
+     
+     <!--Quantidade de funcionários-->
+     <div class="form-group">
+      <label class="label__section" for="qtdefuncionarios">Quantidade de funcionários</label>
+      <input type="number" id="qtdefuncionarios" name="qtdefuncionarios" ng-model="obra.QuantidadeFuncionarios" />
+    </div>
+     
+     <!--Padrão Obra-->
+     <div class="form-group">
+      <label class="label__section" for="padraoobra">Padrão da obra</label>
+      <input type="text" id="padraoobra" name="padraoobra" ng-model="obra.PadraoObraId" />
+    </div>
+			
+<!--			this.QuantidadeFuncionarios = 0;
+			this.PadraoObraId = null;
+			this.TipoObraId = null;
+			this.EmpresaId = null;-->
+
+
+  </form>
+</div>

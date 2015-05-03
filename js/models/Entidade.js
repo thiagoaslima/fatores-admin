@@ -5,65 +5,64 @@
 	angular
 		.module('app.models')
 		.factory('Entidade', [
-			'API',
 			'isFilter',
-			entidade
+			'handleNetdateFilter',
+			factory
 		]);
 
-	function entidade(API, is) {
+	function factory(is, handleDate) {
 
-		function Entidade(obj) {
-			this.Id = obj.Id || 0;
-			this.DataCriacao = _format(obj.DataCriacao) || new Date();
-			this.DataAtualizacao = _format(obj.DataAtualizacao) || new Date();
+		function Entidade(obj, array) {
+			Entidade.handleDates(obj, (array || []));
+			
+			this.Id = (obj && obj.Id) || 0;
+			this.Status = true;
+			this.DataCriacao = (obj && obj.DataCriacao) || handleDate(new Date());
+			this.DataAtualizacao = (obj && obj.DataAtualizacao) || handleDate(new Date());
+			this.UserId = (obj && obj.UserId) || 'd01d29b0-ac15-4f00-9ab0-db224ef599d7';
+
 			return this;
 		}
+
+		Entidade.handleDates = handleDates;
 		
-		Entidade.bindAPI = bindAPI;
-
-		/*
-		 * prototype
-		 * ----------------------------------------------------------
-		 */
-		Entidade.prototype = Object.create(API.prototype);
-
-		Object.cefen.defineMethods(Entidade.prototype, [
-			bindAPI
-		]);
-
-		function bindAPI(obj, address, onObj) {
-			var lista = new API();
-			var self = this;
-			var fns = lista.functions.map(function (fnName) {
-				return [self.prototype[fnName].bind(null, address), fnName];
+		function handleDates(obj, array) {
+			['DataCriacao', 'DataAtualizacao'].concat(array).forEach(function(property) {
+				if (obj && obj[property]) {
+					obj[property] = handleDate(obj[property]);
+				}
 			});
-			Object.cefen.defineMethods(obj, fns);
-			return self;
-		}
-
+			return obj;
+		};
 
 		/*
 		 * private methods
 		 * ----------------------------------------------------------
 		 */
 
-		function _format(value) {
-			if (!value) {
-				return false;
-			}
-
-			if (!is.date(value) &&
-				!is.date.formatted.as.isoString(value)) {
-				throw Error(
-					'Entidade must receive a Date or an ISO String Date as parameter');
-			}
-
-			if (is.date.formatted.as.isoString(value)) {
-				return value;
-			}
-
-			return value.toISOString();
-		}
+//		function _formatDate(value) {
+//			if (!value) {
+//				return false;
+//			}
+//
+//			if (value.indexOf('\/Date(') === 0) {
+//				value = value.replace('\/Date(', '').replace(')\/', '');
+//				value = new Date(parseInt(value, 10));
+//			}
+//
+//			if (!is.date(value) &&
+//				!is.date.formatted.as.isoString(value)) {
+//
+//				throw Error(
+//					'Entidade must receive a Date or an ISO String Date as parameter');
+//			}
+//
+//			if (is.date.formatted.as.isoString(value)) {
+//				return value;
+//			}
+//
+//			return value.toISOString();
+//		}
 
 		/////////////////////////////////////////////
 

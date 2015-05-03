@@ -1,0 +1,16 @@
+<div class='menu-entidades'>
+  <h3>Empresas</h3>
+
+  <div class="menu-entidades-btn">
+    <a class="btn" ui-sref-active="btn-active" data-ui-sref="editarModel({entidade: 'empresas', id: 'nova'})">Nova empresa</a>
+  </div>
+
+  <div>
+    <div class="entidade" ng-repeat="empresa in empresas">
+      <h4 ui-sref-active>
+	<a data-ui-sref="editarModel({entidade: 'empresas', id: empresa.Id})">{{empresa.RazaoSocial}}</a>
+      </h4>
+    </div>
+  </div>
+
+</div>

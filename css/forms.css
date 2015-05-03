@@ -1,0 +1,92 @@
+@charset 'utf-8';
+
+.form-group {
+    position: relative;
+}
+
+label {
+    display: block;
+    font-size: 0.875em;
+    color: #727272;
+}
+
+input + label {
+    margin-left: 0.5em;
+}
+
+.label__section {
+    font-size: 0.6875em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"], 
+input[type="search"], 
+input[type="password"] {
+    border: none;
+    border-bottom: 1px solid #BABABA;
+    display: block;
+    min-width: 20em;
+    background: transparent;
+}
+
+.form-group + .form-group {
+    margin-top: 2em;
+}
+
+.ng-invalid {
+    border-bottom-color: #FF4136;
+    color: #FF4136;
+}
+
+.form-icon {
+    width: 0.75em;
+    height: 0.75em;
+    fill: currentColor;
+}
+
+.inline-elements {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.inline-elements label + input {
+  margin-left: 1em;
+}
+
+.inline-elements + .inline-elements {
+  margin-bottom: 0.5em;
+}
+
+.menu-edit-sub {
+    color: rgb(255, 255, 255);
+    margin-left: 0.5em;
+    outline: 1px solid rgb(230, 230, 230);
+    background: rgb(180, 180, 180);
+    padding: 0 0.25em;
+    font-weight: 300;
+}
+.menu-edit-sub:hover {
+  color: rgb(150, 150, 150);
+  background-color: rgb(255, 255, 255);
+  outline: 1px solid rgb(200, 200, 200);
+}
+
+.parent {
+  padding: 0;
+  margin: 0.75em 0;
+}
+
+.parent li {
+  margin-bottom: 0.5em;
+}
+
+.children {
+    padding-left: 1em;
+}
+.parent + .parent {
+    padding-top: 0.75em;
+    border-top: 1px solid rgb(220, 220, 220);
+}

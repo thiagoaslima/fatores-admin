@@ -1,5 +1,14 @@
 ;
 (function () {
+	
+	if (!Object.prototype.cefen) {
+		Object.defineProperty(Object.prototype, 'cefen', {
+			enumerable: false,
+			configurable: false,
+			writable: true,
+			value: {}
+		});
+	}
 
 	if (typeof Object.prototype.cefen.defineMethods !== 'function') {
 

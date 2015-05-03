@@ -4,8 +4,46 @@ html {
     font-family: Roboto, sans-serif;
 }
 
-.page-header {
-    font-size: 1.25em;
+h1 {
+    margin: 0;
     font-weight: 300;
     text-transform: uppercase;
+    font-size: 1.1em;
+    color: currentColor;
+}
+
+h2 {
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.1em;
+    margin-bottom: 0.6em;
+}
+
+h4 {
+    margin: 0;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+}
+
+h5 {
+    margin: 0;
+}
+
+h6 {
+    margin: 0;
+}
+
+a {
+    color: currentColor;
+    text-decoration: none;
+}
+
+.active {
+  color: hsl(122, 39%, 39%);
+  font-weight: bolder;
 }
