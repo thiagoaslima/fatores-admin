@@ -11,6 +11,9 @@
 			'SIGLAS_ESTADOS',
 			'modelItem',
 			'obrasService',
+			'padroesObraService',
+			'tiposObraService',
+			'empresasService',
 			'isFilter',
 			editarCtrl
 		]);
@@ -22,13 +25,28 @@
 		estados,
 		obra,
 		service,
+		padroesSrv,
+		tiposSrv,
+		empresasSrv,
 		is) {
 
 		var ctrl = this;
 		var _update = false;
 		
 		$scope.estados = estados;
-		$scope[service.modelName] = obra;
+		$scope.obra = obra;
+
+		padroesSrv.query().then(function (resp) {
+			$scope.padroesObra = resp;
+		});
+		
+		tiposSrv.query().then(function (resp) {
+			$scope.tiposObra = resp;
+		});
+		
+		empresasSrv.query().then(function (resp) {
+			$scope.empresas = resp;
+		});
 
 		// botoes
 		$scope.btn = {

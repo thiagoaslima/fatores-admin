@@ -35,35 +35,6 @@
 			return obj;
 		};
 
-		/*
-		 * private methods
-		 * ----------------------------------------------------------
-		 */
-
-//		function _formatDate(value) {
-//			if (!value) {
-//				return false;
-//			}
-//
-//			if (value.indexOf('\/Date(') === 0) {
-//				value = value.replace('\/Date(', '').replace(')\/', '');
-//				value = new Date(parseInt(value, 10));
-//			}
-//
-//			if (!is.date(value) &&
-//				!is.date.formatted.as.isoString(value)) {
-//
-//				throw Error(
-//					'Entidade must receive a Date or an ISO String Date as parameter');
-//			}
-//
-//			if (is.date.formatted.as.isoString(value)) {
-//				return value;
-//			}
-//
-//			return value.toISOString();
-//		}
-
 		/////////////////////////////////////////////
 
 		return Entidade;

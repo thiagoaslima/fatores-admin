@@ -3,16 +3,16 @@
 	
 	angular
 		.module('app.services')
-		.service('portesEmpresaService', [
+		.service('padroesObraService', [
 			'BasicService',
-			'portesEmpresaModel',
+			'tiposObraModel',
 			srv
 		]);
 		
 	function srv(BasicService, Model) {
 		return new BasicService({
 			Model: Model,
-			url: 'portesempresa'
+			url: 'padroesobra'
 		});
 	}
 	

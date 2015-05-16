@@ -1,6 +1,6 @@
 .btn {
     border: 1px solid #DADADA;
-    padding: 0.5em 1.2em;
+    padding: 0.5em 1em;
     text-transform: uppercase;
     font-size: 0.875em;
     font-weight: 400;
@@ -37,4 +37,18 @@
 }
 .btn-principal.btn-active {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn-collapse {
+  width: 1.6em;
+  height: 1em;
+  transform: rotate(0deg) scale3d(1.6,1.6,1);
+  transition: 0.3s transform ease-out;
+  margin-right: 0.2em;
+}
+.btn-collapse.closed {
+  /* width: 2em; */
+  /* height: 1em; */
+  transform: rotate(-90deg) scale3d(1.6,1.6,1);
+  transition: 0.3s transform ease-out;
 }

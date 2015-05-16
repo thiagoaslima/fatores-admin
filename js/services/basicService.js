@@ -107,7 +107,7 @@
 			var returnInstance = get.bind(_this, id);
 			var retrieveInstance = get.bind(_this, id, {}, true);
 
-			return _this.api.save(obj)
+			return _this.api.gravar(obj)
 				.then(createInstance)
 				.then(updateList)
 				.then(returnInstance)
@@ -123,7 +123,7 @@
 			var returnInstance = get.bind(_this, id);
 			var retrieveInstance = get.bind(_this, id, {}, true);
 
-			return _this.api.update(obj)
+			return _this.api.gravar(obj)
 				.then(createInstance)
 				.then(updateList)
 				.then(returnInstance)

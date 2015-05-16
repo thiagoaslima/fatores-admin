@@ -1,173 +1,189 @@
 <div class="modulo-edicao__topo">
-  <div class="controles">
-    <button class="btn btn-principal" type="button" ng-click="empresas.gravar()">Gravar</button>
-    <button class="btn" type="button" ng-if="btn.apagar" ng-click="empresas.delete()">Apagar</button>
-  </div>
+	<div class="controles">
+		<button class="btn btn-principal" type="button" ng-click="empresas.gravar()">Gravar</button>
+		<button class="btn" type="button" ng-if="btn.apagar" ng-click="empresas.delete()">Apagar</button>
+	</div>
 </div>
-
 <div class="modulo-edicao__corpo">
-  <form name="dadosEmpresa" id="dadosEmpresa" novalidate ng-submit="empresas.gravar()">
-
-
-    <!--Id-->
-
-    <!--Status-->
-    <div class="form-group">
-      <label class="label__section" for="status">Status</label>
-
-      <div class="inline-elements">
-	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="empresa.Status" /><label for="label_true">Ativa</label>
-	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="empresa.Status" /><label for="label_false">Inativa</label>
-      </div>
-    </div>
-
-
-    <!--RazaoSocial-->
-    <div class="form-group">
-      <label class="label__section" for="razaoSocial">Razão Social</label>
-      <input type="text" id="razaoSocial" name="razaoSocial" ng-model="empresa.RazaoSocial" />
-    </div>
-
-    <!--CNPJ-->
-    <div class="form-group">
-      <label class="label__section" for="cnpj">CNPJ</label>
-      <input type="text" id="cnpj" name="cnpj" ng-model="empresa.CNPJ" />
-    </div>
-
-    <!--Endereco-->
-    <div class="form-group">
-      <label class="label__section" for="endereco">Endereço</label>
-      <input type="text" id="endereco" name="endereco" ng-model="empresa.Endereco" />
-    </div>
-
-    <!--EnderecoNumero-->
-    <div class="form-group">
-      <label class="label__section" for="endereco">Número</label>
-      <input type="text" id="endereco" name="endereco" ng-model="empresa.EnderecoNumero" />
-    </div>
-
-    <!--EnderecoComplemento-->
-    <div class="form-group">
-      <label class="label__section" for="EnderecoComplemento">Complemento</label>
-      <input type="text" id="EnderecoComplemento" name="EnderecoComplemento" ng-model="empresa.EnderecoComplemento" />
-    </div>
-
-    <!--EnderecoLocalidade-->
-    <div class="form-group">
-      <label class="label__section" for="EnderecoLocalidade">Localidade</label>
-      <input type="text" id="EnderecoLocalidade" name="EnderecoLocalidade" ng-model="empresa.EnderecoLocalidade" />
-    </div>
-
-    <!--EnderecoUF-->
-    <div class="form-group">
-      <label class="label__section" for="EnderecoUF">UF</label>
-      <select ng-model="empresa.EnderecoUF" ng-options="estado.name as estado.name for estado in estados"></select>
-    </div>
-
-    <!--EnderecoCEP-->
-    <div class="form-group">
-      <label class="label__section" for="EnderecoCEP">Cep</label>
-      <input type="text" id="EnderecoCEP" name="EnderecoCEP" ng-model="empresa.EnderecoCEP" />
-    </div>
-
-    <!--QuantidadeFuncionarios-->
-    <div class="form-group">
-      <label class="label__section" for="QuantidadeFuncionarios">Quantidade de funcionarios</label>
-      <input type="number" id="QuantidadeFuncionarios" name="QuantidadeFuncionarios" ng-model="empresa.QuantidadeFuncionarios" />
-    </div>
-
-    <!--InformacoesComplementares-->
-    <div class="form-group">
-      <label class="label__section" for="InformacoesComplementares">Informacoes complementares</label>
-      <textarea id="InformacoesComplementares" name="InformacoesComplementares" ng-model="empresa.InformacoesComplementares"></textarea>
-    </div>
-
-    <!--AreaAtuacaoId-->
-    <div class="form-group">
-
-      <div class='inline-elements'>
-	<label class="label__section" for="AreaAtuacaoId">Área de atuação</label>
-	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'areasAtuacao'})">
-	  <svg class="form-icon">
-	  <use xlink:href="#edit" />
-	  </svg>
-	  <small>Editar Áreas de Atuação</small>
-	</a>
-      </div>
-
-      <div class='inline-elements' ng-repeat="area in areasAtuacao">
-	<input id="area_{{::area.Id}}" type="radio" name="areaAtuacaoId" ng-model="empresa.AreaAtuacaoId" ng-value="area.Id">
-	<label for="area_{{::area.Id}}">{{::area.Nome}}</label>
-      </div>
-
-    </div>
-
-    <!--PorteEmpresaId-->
-
-
-    <!--Obras-->
-    <div class="form-group">
-
-      <div class='inline-elements'>
-	<label class="label__section" for="obras">Obras</label>
-	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras'})">
-	  <svg class="form-icon">
-	  <use xlink:href="#edit" />
-	  </svg>
-	  <small>Editar Obras</small>
-	</a>
-      </div>
-
-      <ul class='parent' ng-repeat="obra in obras">
-	<li class='inline-elements'>
-	  <input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="obra.Id">
-	  <label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
-	</li>
-
-	<ul class="children" ng-if='obra.children' ng-repeat="child in obra.children">
-	  <li class='inline-elements'>
-	    <input id="obra_{{::child.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child.Id">
-	    <label for="obra_{{::child.Id}}">{{::child.Nome}}</label>
-	  </li>
-	</ul>
-
-      </ul>
-    </div>
-    
-    <!--Obras Contratada-->
-    <div class="form-group">
-
-      <div class='inline-elements'>
-	<label class="label__section" for="obras">Obras na qual a empresa é contratada</label>
-	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras'})">
-	  <svg class="form-icon">
-	  <use xlink:href="#edit" />
-	  </svg>
-	  <small>Editar Obras</small>
-	</a>
-      </div>
-
-      <ul class='parent' ng-repeat="obra in obras">
-	<li class='inline-elements'>
-	  <input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.ObrasContratada" checklist-value="obra.Id">
-	  <label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
-	</li>
-
-	<ul class="children" ng-if='obra.children' ng-repeat="child in obra.children">
-	  <li class='inline-elements'>
-	    <input id="obra_{{::child.Id}}" type="checkbox" name="obras" checklist-model="empresa.ObrasContratada" checklist-value="child.Id">
-	    <label for="obra_{{::child.Id}}">{{::child.Nome}}</label>
-	  </li>
-	</ul>
-
-      </ul>
-    </div>
-
-
-
-    <!--DataCriacao-->
-    <!--DataAtualizacao-->
-
+	<form name="dadosEmpresa" id="dadosEmpresa" novalidate ng-submit="empresas.gravar()">
+		<!--Status-->
+		<div class="form-group">
+			<label class="label__section" for="status">Status</label>
+			<div class="inline-elements">
+				<input type="radio" id="status_true" name="status" ng-value="true" ng-model="empresa.Status" />
+				<label for="label_true">Ativa</label>
+				<input type="radio" id="status_false" name="status" ng-value="false" ng-model="empresa.Status" />
+				<label for="label_false">Inativa</label>
+			</div>
+		</div>
+		
+		<fieldset collapse="dadosCadastraisCollapsed">
+			<legend ng-class="{'closed': dadosCadastraisCollapsed}">
+				<collapse-button scope-prop="dadosCadastraisCollapsed" starts-closed></collapse-button>
+				<span>Dados Cadastrais</span>
+			</legend>
+			
+			<!--RazaoSocial-->
+			<div class="form-group">
+				<label class="label__section" for="razaoSocial">Razão Social</label>
+				<input type="text" id="razaoSocial" name="razaoSocial" ng-model="empresa.RazaoSocial" />
+			</div>
+			
+			<!--CNPJ-->
+			<div class="form-group">
+				<label class="label__section" for="cnpj">CNPJ</label>
+				<input type="text" id="cnpj" name="cnpj" ng-model="empresa.CNPJ" />
+			</div>
+			
+			<!--Endereco-->
+			<div class="form-group">
+				<label class="label__section" for="endereco">Endereço</label>
+				<input type="text" id="endereco" name="endereco" ng-model="empresa.Endereco" />
+			</div>
+			
+			<!--EnderecoNumero-->
+			<div class="form-group">
+				<label class="label__section" for="endereco">Número</label>
+				<input type="text" id="endereco" name="endereco" ng-model="empresa.EnderecoNumero" />
+			</div>
+			
+			<!--EnderecoComplemento-->
+			<div class="form-group">
+				<label class="label__section" for="EnderecoComplemento">Complemento</label>
+				<input type="text" id="EnderecoComplemento" name="EnderecoComplemento" ng-model="empresa.EnderecoComplemento"
+				/>
+			</div>
+			
+			<!--EnderecoLocalidade-->
+			<div class="form-group">
+				<label class="label__section" for="EnderecoLocalidade">Localidade</label>
+				<input type="text" id="EnderecoLocalidade" name="EnderecoLocalidade" ng-model="empresa.EnderecoLocalidade"
+				/>
+			</div>
+			
+			<!--EnderecoUF-->
+			<div class="form-group">
+				<label class="label__section" for="EnderecoUF">UF</label>
+				<select ng-model="empresa.EnderecoUF" ng-options="estado.name as estado.name for estado in estados"></select>
+			</div>
+			
+			<!--EnderecoCEP-->
+			<div class="form-group">
+				<label class="label__section" for="EnderecoCEP">Cep</label>
+				<input type="text" id="EnderecoCEP" name="EnderecoCEP" ng-model="empresa.EnderecoCEP" />
+			</div>
+			
+			<!--QuantidadeFuncionarios-->
+			<div class="form-group">
+				<label class="label__section" for="QuantidadeFuncionarios">Quantidade de funcionarios</label>
+				<input type="number" id="QuantidadeFuncionarios" name="QuantidadeFuncionarios" ng-model="empresa.QuantidadeFuncionarios"
+				/>
+			</div>
+			
+			<!--InformacoesComplementares-->
+			<div class="form-group">
+				<label class="label__section" for="InformacoesComplementares">Informacoes complementares</label>
+				<textarea id="InformacoesComplementares" name="InformacoesComplementares" ng-model="empresa.InformacoesComplementares"></textarea>
+			</div>
+		</fieldset>
+		
+		<!--AreaAtuacaoId-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="AreaAtuacaoId">Área de atuação</label>
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'areasAtuacao', subid: null})">
+				  <svg class="form-icon">
+				  <use xlink:href="#edit" />
+				  </svg>
+				  <small>Editar Áreas de Atuação</small>
+				</a>
+			</div>
+			<div class='inline-elements' ng-repeat="area in areasAtuacao">
+				<input id="area_{{::area.Id}}" type="radio" name="areaAtuacaoId" ng-model="empresa.AreaAtuacaoId" ng-value="area.Id">
+				<label for="area_{{::area.Id}}">{{::area.Nome}}</label>
+			</div>
+		</div>
+		
+		<!--PorteEmpresaId-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="PorteEmpresaId">Portes de Empresa</label>
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'portesEmpresa', subid: null})">
+				  <svg class="form-icon">
+				  <use xlink:href="#edit" />
+				  </svg>
+				  <small>Editar Portes de Empresa</small>
+				</a>
+			</div>
+			<div class='inline-elements' ng-repeat="porte in portesEmpresa">
+				<input id="porte_{{::porte.Id}}" type="radio" name="PorteEmpresaId" ng-model="empresa.PorteEmpresaId" ng-value="porte.Id">
+				<label for="porte_{{::porte.Id}}">{{::porte.Nome}}</label>
+			</div>
+		</div>		
+		
+		<!--Obras-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="obras">Obras</label>
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: null})">
+				  <svg class="form-icon">
+				  <use xlink:href="#edit" />
+				  </svg>
+				  <small>Editar Obras</small>
+				</a>
+			</div>
+			<ul class='parent' ng-repeat="obra in obras">
+				<li class='inline-elements'>
+					<collapse-button ng-if="obra.children" scope-prop="obras{{::obra.Id}}Collapse" starts-closed></collapse-button>
+					<input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="obra.Id">
+					<label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
+				</li>
+				
+				<ul class='child' collapse="obras{{::obra.Id}}Collapse" class="children" ng-if='obra.children' ng-repeat="child1 in obra.children">
+					<li class='inline-elements'>
+						<collapse-button ng-if="child1.children" scope-prop="obras{{::child1.Id}}Collapse" starts-closed></collapse-button>
+						<input id="obra_{{::child1.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child1.Id">
+						<label for="obra_{{::child1.Id}}">{{::child1.Nome}}</label>
+					</li>
+					
+					<ul class='child' collapse="obras{{::child1.Id}}Collapse" class="children" ng-if='child1.children' ng-repeat="child2 in obra.children">
+						<li class='inline-elements'>
+							<collapse-button ng-if="child2.children" scope-prop="obras{{::child2.Id}}Collapse" starts-closed></collapse-button>
+							<input id="obra_{{::child2.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child2.Id">
+							<label for="obra_{{::child2.Id}}">{{::child2.Nome}}</label>
+						</li>
+						
+						<ul class='child' collapse="obras{{::child2.Id}}Collapse" class="children" ng-if='child2.children' ng-repeat="child3 in obra.children">
+							<li class='inline-elements'>
+								<input id="obra_{{::child3.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child3.Id">
+								<label for="obra_{{::child3.Id}}">{{::child3.Nome}}</label>
+							</li>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+		</div>
+		
+		
+		<!--Tarefas-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="tarefas">Tarefas</label>
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'tarefas', subid: null})">
+				  <svg class="form-icon">
+				  <use xlink:href="#edit" />
+				  </svg>
+				  <small>Editar Tarefas</small>
+				</a>
+			</div>
+			
+			<ul class="parent">
+				<li class='inline-elements' ng-repeat="tarefa in tarefas">
+					<input id="tarefa_{{::tarefa.Id}}" type="checkbox" name="tarefas" checklist-model="empresa.Tarefas" checklist-value="tarefa.Id">
+					<label for="tarefa_{{::tarefa.Id}}">{{::tarefa.Nome}}</label>
+				</li>
+			</ul>
+		</div>
+		
+	</form>
 </div>
-
-</form>

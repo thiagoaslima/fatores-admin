@@ -4,15 +4,13 @@
 
 	angular
 		.module('app.models')
-		.controller('tarefasController', [
+		.controller('atividadesController', [
 			'$scope',
 			'$state',
 			'logger',
-			'SIGLAS_ESTADOS',
 			'modelItem',
-			'tarefasService',
-			'empresasService',
-			'funcoesService',
+			'atividadesService',
+			'buildHierarchyFilter',
 			'isFilter',
 			editarCtrl
 		]);
@@ -21,26 +19,19 @@
 		$scope,
 		$state,
 		logger,
-		estados,
-		tarefa,
-		tarefas,
-		empresasSrv,
-		funcoesSrv,
+		atividade,
+		atividadesSrv,
+		buildHierarchy,
 		is) {
 
 		var ctrl = this;
 		var _update = false;
-		
-		$scope.estados = estados;
-		$scope.tarefa = tarefa;
-		
-		empresasSrv.query().then(function(resp) {
-			$scope.empresas = resp;
+
+		atividadesSrv.query().then(function (resp) {
+			$scope.atividades = buildHierarchy(resp, 'AtividadeId');
 		});
-		
-		funcoesSrv.query().then(function(resp) {
-			$scope.funcoes = resp;
-		})
+
+		$scope.atividade = atividade;
 
 		// botoes
 		$scope.btn = {
@@ -51,36 +42,36 @@
 		init();
 
 		function init() {
-			if (is.object(tarefa) && tarefa.Id && tarefa.Id !== 0) {
+			if (is.object(atividade) && atividade.Id && atividade.Id !== 0) {
 				_update = true;
 			} else {
-				// nova obra
 				$scope.btn.apagar = false;
 			}
 		}
 
 		var msgs = {
 			sucesso: 'A ação foi realzada com sucesso!',
-			erro: 'Não foi possível Realizar a solicitação.' + 
+			erro: 'Não foi possível Realizar a solicitação.' +
 				'Por favor, tente novamente mais tarde.'
 		};
+
 
 		ctrl.gravar = function () {
 
 			if (!_update) {
-				return tarefas.save(tarefa)
+				return atividadesSrv.save(atividade)
 					.then(redirect)
 					.then(showSuccess.bind(null, msgs.sucesso))
 					.catch(showError.bind(null, msgs.erro));
 			}
 
-			return tarefas.update(tarefa)
+			return atividadesSrv.update(atividade)
 				.then(showSuccess.bind(null, msgs.sucesso))
 				.catch(showError.bind(null, msgs.erro));
 		};
 
 		ctrl.delete = function () {
-			return tarefas.delete(tarefa)
+			return atividadesSrv.delete(atividade)
 				.then(showSuccess)
 				.catch(showError);
 		};
@@ -101,12 +92,12 @@
 		}
 
 		function showSuccess(msg, resp) {
-			logger.sucess(msg);
+//			logger.sucess(msg);
 			return resp;
 		}
 
 		function showError(msg, resp) {
-			logger.error(msg);
+//			logger.error(msg);
 			return resp;
 		}
 

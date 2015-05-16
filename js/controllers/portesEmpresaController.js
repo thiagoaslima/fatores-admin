@@ -3,22 +3,19 @@
 	
 	angular
 		.module('app.controllers')
-		.controller('padroesObraController', [
+		.controller('portesEmpresaController', [
 			'$scope',
 			'$state',
 			'modelItem',
-			'padroesObraService',
+			'portesEmpresaService',
 			'isFilter',
 			ctrl
 		]);
 		
-	function ctrl($scope, $state, padrao, padroesObra, is) {
+	function ctrl($scope, $state, porte, portesEmpresa, is) {
 		var _update = false;
 		
-		angular.extend($scope, {
-			padrao: padrao,
-			padroesObra: padroesObra
-		});
+		$scope.porte = porte;
 		
 		// botoes
 		$scope.btn = {
@@ -29,7 +26,7 @@
 		init();
 
 		function init() {
-			if (is.object(padrao) && padrao.Id && padrao.Id !== 0) {
+			if (is.object(area) && area.Id && area.Id !== 0) {
 				_update = true;
 			} else {
 				// nova empresa

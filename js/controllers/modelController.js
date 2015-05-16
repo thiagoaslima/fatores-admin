@@ -16,7 +16,7 @@
 
 	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy) {
 
-		var propriedades = ['ObraId'];
+		var propriedades = ['ObraId', 'AtividadeId'];
 		var prop = propriedades.filter(function(prop) {
 			return hasProperty(items, prop);
 		})[0];

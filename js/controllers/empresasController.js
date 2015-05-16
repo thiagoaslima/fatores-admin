@@ -11,9 +11,11 @@
 			'SIGLAS_ESTADOS',
 			'modelItem',
 			'empresasService',
+			'BasicController',
 			'areasAtuacaoService',
 			'portesEmpresaService',
 			'obrasService',
+			'tarefasService',
 			'buildHierarchyFilter',
 			'isFilter',
 			editarCtrl
@@ -26,25 +28,25 @@
 		estados,
 		empresa,
 		empresas,
+		basicController,
 		areasAtuacaoSrv,
 		portesEmpresaSrv,
 		obrasSrv,
+		tarefasSrv,
 		buildHierarchy,
 		is) {
 
 		var ctrl = this;
 		var _update = false;
-
-		areasAtuacaoSrv.query().then(function (resp) {
-			$scope.areasAtuacao = resp;
-		});
-		portesEmpresaSrv.query().then(function (resp) {
-			$scope.portesEmpresa = resp;
-		});
 		
-		obrasSrv.query().then(function (resp) {
-			$scope.obras = buildHierarchy(resp, 'ObraId');
-		});
+		var deps = ['areasAtuacao', 'portesEmpresa', 'tarefas'];
+		basicController.getDeps($scope, deps);
+
+		var hierarchical = [{
+			entidade: 'obras',
+			prop: 'ObraId'	
+		}];
+		basicController.getHierarchicalDeps($scope, hierarchical);
 
 		angular.extend($scope, {
 			estados: estados,
@@ -111,12 +113,12 @@
 		}
 
 		function showSuccess(msg, resp) {
-			logger.sucess(msg);
+//			logger.sucess(msg);
 			return resp;
 		}
 
 		function showError(msg, resp) {
-			logger.error(msg);
+//			logger.error(msg);
 			return resp;
 		}
 

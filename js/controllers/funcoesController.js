@@ -4,14 +4,11 @@
 
 	angular
 		.module('app.models')
-		.controller('tarefasController', [
+		.controller('funcoesController', [
 			'$scope',
 			'$state',
 			'logger',
-			'SIGLAS_ESTADOS',
 			'modelItem',
-			'tarefasService',
-			'empresasService',
 			'funcoesService',
 			'isFilter',
 			editarCtrl
@@ -21,26 +18,17 @@
 		$scope,
 		$state,
 		logger,
-		estados,
-		tarefa,
-		tarefas,
-		empresasSrv,
-		funcoesSrv,
+		funcao,
+		funcoes,
 		is) {
 
 		var ctrl = this;
 		var _update = false;
-		
-		$scope.estados = estados;
-		$scope.tarefa = tarefa;
-		
-		empresasSrv.query().then(function(resp) {
-			$scope.empresas = resp;
+
+		angular.extend($scope, {
+			funcoes: funcoes,
+			funcao: funcao
 		});
-		
-		funcoesSrv.query().then(function(resp) {
-			$scope.funcoes = resp;
-		})
 
 		// botoes
 		$scope.btn = {
@@ -51,10 +39,9 @@
 		init();
 
 		function init() {
-			if (is.object(tarefa) && tarefa.Id && tarefa.Id !== 0) {
+			if (is.object(funcao) && funcao.Id && funcao.Id !== 0) {
 				_update = true;
 			} else {
-				// nova obra
 				$scope.btn.apagar = false;
 			}
 		}
@@ -68,19 +55,19 @@
 		ctrl.gravar = function () {
 
 			if (!_update) {
-				return tarefas.save(tarefa)
+				return funcoes.save(funcao)
 					.then(redirect)
 					.then(showSuccess.bind(null, msgs.sucesso))
 					.catch(showError.bind(null, msgs.erro));
 			}
 
-			return tarefas.update(tarefa)
+			return funcoes.update(funcao)
 				.then(showSuccess.bind(null, msgs.sucesso))
 				.catch(showError.bind(null, msgs.erro));
 		};
 
 		ctrl.delete = function () {
-			return tarefas.delete(tarefa)
+			return funcoes.delete(funcao)
 				.then(showSuccess)
 				.catch(showError);
 		};
@@ -101,12 +88,10 @@
 		}
 
 		function showSuccess(msg, resp) {
-			logger.sucess(msg);
 			return resp;
 		}
 
 		function showError(msg, resp) {
-			logger.error(msg);
 			return resp;
 		}
 

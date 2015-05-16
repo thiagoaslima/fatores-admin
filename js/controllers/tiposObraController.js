@@ -3,21 +3,21 @@
 	
 	angular
 		.module('app.controllers')
-		.controller('areasAtuacaoController', [
+		.controller('tiposObraController', [
 			'$scope',
 			'$state',
 			'modelItem',
-			'areasAtuacaoService',
+			'tiposObraService',
 			'isFilter',
 			ctrl
 		]);
 		
-	function ctrl($scope, $state, area, areasAtuacao, is) {
+	function ctrl($scope, $state, tipo, tiposObra, is) {
 		var _update = false;
 		
 		angular.extend($scope, {
-			area: area,
-			areasAtuacao: areasAtuacao
+			padrao: tipo,
+			padroesObra: tiposObra
 		});
 		
 		// botoes
@@ -29,7 +29,7 @@
 		init();
 
 		function init() {
-			if (is.object(area) && area.Id && area.Id !== 0) {
+			if (is.object(tipo) && tipo.Id && tipo.Id !== 0) {
 				_update = true;
 			} else {
 				// nova empresa

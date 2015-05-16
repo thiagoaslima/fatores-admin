@@ -9,7 +9,8 @@
 			'app.routes',
 			'app.models',
 			'app.services',
-			'app.filters'
+			'app.filters',
+			'app.directives'
 		])
 		.value("DB_URL", "https://fatoresweb.azurewebsites.net/")
 		.config(['$httpProvider', function ($httpProvider) {

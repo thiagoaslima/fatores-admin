@@ -6,8 +6,8 @@
 
 .sub-lista-entidades {
     margin-top: 1.2em;
-    list-style-type: square;
-    padding: 0 0 0 1em;
+    list-style-type: none;
+    padding: 0 0 0 0.5em;
     color: #444444;
 }
 
@@ -28,7 +28,7 @@
     border: 0.4em solid transparent;
     border-left-color:currentColor;
     display: inline-block;
-    content: '';
+    /* content: ''; */
     /* position: relative; */
     /* width: 0.25em; */
     /* background-color: red; */

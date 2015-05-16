@@ -4,14 +4,14 @@
 
 	angular
 		.module('app.models')
-		.factory('portesEmpresaModel', [
+		.factory('tiposObraModel', [
 			'Entidade', 
 			model
 		]);
 
 	function model(Entidade) {
 
-		function PorteEmpresa(obj) {
+		function TiposObra(obj) {
 			Entidade.call(this, obj);
 
 			this.Nome = '';
@@ -22,7 +22,7 @@
 			return this;
 		}
 
-		return PorteEmpresa;
+		return TiposObra;
 	}
 
 })(window.angular);

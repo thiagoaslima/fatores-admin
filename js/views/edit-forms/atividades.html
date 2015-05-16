@@ -1,0 +1,108 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="atividade.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="atividade.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+
+  <form name="dadosAtividade" id="dadosAtividade" novalidate ng-submit="atividades.gravar()">
+    <!--Id-->
+
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+
+      <div class="inline-elements">
+	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="atividade.Status" /><label for="label_true">Ativa</label>
+	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="atividade.Status" /><label for="label_false">Inativa</label>
+      </div>
+    </div>
+
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="atividade.Nome" />
+    </div>
+    
+    <!--Descrição-->
+    <div class="form-group">
+      <label class="label__section" for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" ng-model="atividade.Descricao"></textarea>
+    </div>
+
+    <!--Cor-->
+    <div class="form-group">
+      <label class="label__section" for="cor">Cor</label>
+      <input type="text" id="cor" name="cor" ng-model="atividade.Cor" />
+    </div>
+
+    <!--Duracao Minima-->
+    <div class="form-group">
+      <label class="label__section" for="duracaoMinima">Duração Mínima</label>
+      <input type="number" id="duracaoMinima" name="duracaoMinima" ng-model="atividade.DuracaoMinima" />
+    </div>
+
+    <!--Duracao Máxima-->
+    <div class="form-group">
+      <label class="label__section" for="duracaoMaxima">Duração Máxima<br /><small>Caso não deseje uma duração máxima, coloque 0 (zero).</small></label>
+      <input type="number" id="duracaoMaxima" name="duracaoMaxima" ng-model="atividade.DuracaoMaxima" />
+    </div>
+
+    <!--Atividades Filhas-->
+    <div class="form-group">
+
+      <div class='inline-elements'>
+	<label class="label__section" for="obras">Atividades Filhas</label>
+	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'atividades', subid: null})">
+	  <svg class="form-icon">
+	  <use xlink:href="#edit" />
+	  </svg>
+	  <small>Editar Atividades</small>
+	</a>
+      </div>
+
+      <!--Filhas nivel1-->
+      <ul class='parent' ng-repeat="ativFilha1 in atividades">
+	<li class='inline-elements'>
+	  <input id="ativFilha1_{{::ativFilha1.Id}}" type="checkbox" name="ativFilha1_{{::ativFilha1.Id}}" checklist-model="atividade.AtividadesFilhas" checklist-value="ativFilha1.Id">
+	  <label for="ativFilha1_{{::ativFilha1.Id}}">{{::ativFilha1.Nome}}</label>
+	</li>
+
+	<!--Filhas nivel2-->
+	<ul class="children" ng-if='ativFilha1.children' ng-repeat="ativFilha2 in ativFilha1.children">
+	  <li class='inline-elements'>
+	    <input id="ativFilha2_{{::ativFilha2.Id}}" type="checkbox" name="ativFilha2_{{::ativFilha2.Id}}" checklist-model="atividade.AtividadesFilhas" checklist-value="ativFilha2.Id">
+	    <label for="ativFilha2_{{::ativFilha2.Id}}">{{::ativFilha2.Nome}}</label>
+	  </li>
+
+
+	  <!--Filhas nivel3-->
+	  <ul class="children" ng-if='ativFilha2.children' ng-repeat="ativFilha3 in ativFilha2.children">
+	    <li class='inline-elements'>
+	      <input id="ativFilha3_{{::ativFilha3.Id}}" type="checkbox" name="ativFilha3_{{::ativFilha3.Id}}" checklist-model="atividade.AtividadesFilhas" checklist-value="ativFilha3.Id">
+	      <label for="ativFilha3_{{::ativFilha3.Id}}">{{::ativFilha3.Nome}}</label>
+	    </li>
+
+
+	    <!--Filhas nivel4-->
+	    <ul class="children" ng-if='ativFilha3.children' ng-repeat="ativFilha4 in ativFilha3.children">
+	      <li class='inline-elements'>
+		<input id="ativFilha4_{{::ativFilha4.Id}}" type="checkbox" name="ativFilha4_{{::ativFilha4.Id}}" checklist-model="atividade.AtividadesFilhas" checklist-value="ativFilha4.Id">
+		<label for="ativFilha4_{{::ativFilha4.Id}}">{{::ativFilha4.Nome}}</label>
+	      </li>
+
+	    </ul>
+
+
+	  </ul>
+
+	</ul>
+
+      </ul>
+    </div>
+
+
+  </form>
+</div>

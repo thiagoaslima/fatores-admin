@@ -6,15 +6,18 @@
 </div>
 
 <div class="modulo-edicao__corpo">
-  
+
   <form name="dadosObra" id="dadosObra" novalidate ng-submit="obras.gravar()">
     <!--Id-->
 
     <!--Status-->
     <div class="form-group">
       <label class="label__section" for="status">Status</label>
-      <input type="radio" id="status_true" name="status" ng-value="true" ng-model="obra.Status" /><label for="label_true">Ativa</label>
-      <input type="radio" id="status_false" name="status" ng-value="false" ng-model="obra.Status" /><label for="label_false">Inativa</label>
+
+      <div class="inline-elements">
+	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="obra.Status" /><label for="label_true">Ativa</label>
+	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="obra.Status" /><label for="label_false">Inativa</label>
+      </div>
     </div>
 
 
@@ -23,59 +26,93 @@
       <label class="label__section" for="nome">Nome</label>
       <input type="text" id="nome" name="nome" ng-model="obra.Nome" />
     </div>
-    
+
     <!--Area Total Construida-->
     <div class="form-group">
       <label class="label__section" for="areatotal">Área total construída</label>
       <input type="number" id="areatotal" name="areatotal" ng-model="obra.AreaTotalConstruida" />
     </div>
-    
+
     <!--VGV-->
     <div class="form-group">
       <label class="label__section" for="vgv">VGV</label>
       <input type="number" id="vgv" name="vgv" ng-model="obra.VGV" />
     </div>
 
-     <!--Descrição-->
-     <div class="form-group">
+    <!--Descrição-->
+    <div class="form-group">
       <label class="label__section" for="descricao">Descrição</label>
       <input type="text" id="descricao" name="descricao" ng-model="obra.Descricao" />
     </div>
-     
-     <!--Número Blocos-->
-     <div class="form-group">
+
+    <!--Número Blocos-->
+    <div class="form-group">
       <label class="label__section" for="numeroblocos">Número de blocos</label>
       <input type="text" id="numeroblocos" name="numeroblocos" ng-model="obra.NumeroBlocos" />
     </div>
-     
-     <!--Inicio Execução-->
-     <div class="form-group">
+
+    <!--Inicio Execução-->
+    <div class="form-group">
       <label class="label__section" for="inicioexecucao">Início execução</label>
       <input type="date" id="inicioexecucao" name="inicioexecucao" ng-model="obra.InicioExecucao" />
     </div>
-     
-     <!--Fim Execução-->
-     <div class="form-group">
+
+    <!--Fim Execução-->
+    <div class="form-group">
       <label class="label__section" for="fimexecucao">Início execução</label>
       <input type="date" id="fimexecucao" name="fimexecucao" ng-model="obra.FimExecucao" />
     </div>
-     
-     <!--Quantidade de funcionários-->
-     <div class="form-group">
+
+    <!--Quantidade de funcionários-->
+    <div class="form-group">
       <label class="label__section" for="qtdefuncionarios">Quantidade de funcionários</label>
       <input type="number" id="qtdefuncionarios" name="qtdefuncionarios" ng-model="obra.QuantidadeFuncionarios" />
     </div>
-     
-     <!--Padrão Obra-->
-     <div class="form-group">
-      <label class="label__section" for="padraoobra">Padrão da obra</label>
-      <input type="text" id="padraoobra" name="padraoobra" ng-model="obra.PadraoObraId" />
+
+    <!--Padrao da Obra-->
+    <div class="form-group">
+      <label class="label__section">Padrão da obra</label>
+
+      <div class='inline-elements' ng-repeat="padrao in padroesObra">
+	<input id="padrao_{{::padrao.Id}}" type="radio" name="PadraoObraId" ng-model="obra.PadraoObraId" ng-value="padrao.Id">
+	<label for="padrao_{{::padrao.Id}}">{{::padrao.Nome}}</label>
+      </div>
     </div>
-			
-<!--			this.QuantidadeFuncionarios = 0;
-			this.PadraoObraId = null;
-			this.TipoObraId = null;
-			this.EmpresaId = null;-->
+    
+    <!--Tipo da Obra-->
+    <div class="form-group">
+      <label class="label__section">Tipo de obra</label>
+
+      <div class='inline-elements' ng-repeat="tipo in tiposObra">
+	<input id="tipo_{{::tipo.Id}}" type="radio" name="TipoObraId" ng-model="obra.TipoObraId" ng-value="tipo.Id">
+	<label for="tipo_{{::tipo.Id}}">{{::tipo.Nome}}</label>
+      </div>
+    </div>
+
+    <!--EmpresaId-->
+    <div class="form-group">
+
+      <div class='inline-elements'>
+	<label class="label__section">Empresa responsável pela obra</label>
+	<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'empresas', subid: null})">
+	  <svg class="form-icon">
+	  <use xlink:href="#edit" />
+	  </svg>
+	  <small>Editar</small>
+	</a>
+      </div>
+
+      <div class='inline-elements' ng-repeat="empresa in empresas">
+	<input id="empresa_{{::empresa.Id}}" type="radio" name="empresaid" ng-model="obra.EmpresaId" ng-value="empresa.Id">
+	<label for="empresa_{{::empresa.Id}}">{{::empresa.RazaoSocial}}</label>
+      </div>
+
+    </div>
+
+    <!--			this.QuantidadeFuncionarios = 0;
+			    this.PadraoObraId = null;
+			    this.TipoObraId = null;
+			    this.EmpresaId = null;-->
 
 
   </form>

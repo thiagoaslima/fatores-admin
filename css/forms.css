@@ -4,6 +4,57 @@
     position: relative;
 }
 
+fieldset {
+  margin: 2em 0;
+  border: none;
+  border-top: 1px solid rgb(220, 220, 220);
+  border-bottom: 1px solid rgb(220, 220, 220);
+  padding: 2em 1.5em;
+}
+
+fieldset.collapse {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+[collapse] {
+  overflow: hidden;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+legend {
+  text-transform: uppercase;
+  color: #727272;
+  font-size: 0.875em;
+  top: 1em;
+  display: block;
+  margin-left: -2em;
+  background: transparent;
+  padding: 0 1em 0 0;
+}
+
+.collapse_button {
+  cursor: pointer;
+}
+
+.collapse_button:before {
+  /* content: ''; */
+  height: inherit;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNyAxMGw1IDUgNS01eiIvPjwvc3ZnPg==);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 1.5em;
+  display: inline-block;
+  min-height: 1.5em;
+  margin-bottom: -0.25em;
+}
+
+.collapse .collapse_button:before,
+.collapse_button.collapsed:before {
+  transform: rotate(-90deg);
+}
+
 label {
     display: block;
     font-size: 0.875em;
@@ -29,6 +80,7 @@ input[type="password"] {
     display: block;
     min-width: 20em;
     background: transparent;
+    width: 100%;
 }
 
 .form-group + .form-group {
@@ -56,8 +108,9 @@ input[type="password"] {
   margin-left: 1em;
 }
 
-.inline-elements + .inline-elements {
-  margin-bottom: 0.5em;
+.inline-elements + .inline-elements, 
+.label__section + .inline-elements {
+  margin-top: 0.5em;
 }
 
 .menu-edit-sub {

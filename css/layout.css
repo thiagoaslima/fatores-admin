@@ -43,7 +43,7 @@ body {
     flex: 1 1 auto;
     
     width: 100%;
-    overflow: hidden;
+    overflow-y: hidden;
     padding: 0;
     background-color: hsl(0, 0%, 98%);
 }
@@ -51,7 +51,7 @@ body {
 .sidebar {
     flex: 0 0 auto;
     
-    width: 12em;
+    width: 10em;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     overflow: auto;
     padding: 0.75em 0.5em 0.5em 2em;

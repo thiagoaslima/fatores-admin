@@ -15,7 +15,7 @@
     align-content: stretch;
     flex: 0 0 auto;
     
-    width: 12em;
+    width: 11em;
     border-right: 1px solid hsl(0, 0%, 100%);
     background-color: rgba(0, 0, 0, 0.02);
     box-shadow: 1px 0 0 hsl(0, 0%, 94%);
@@ -28,6 +28,7 @@
     align-content: stretch;
     flex: 1 0 auto;
     overflow: hidden;
+    width: 24em;
 }
 
 .modulo-edicao__topo {

@@ -127,9 +127,9 @@
 				{ids: params} : {nome: params, razaosocial: params};
 
 			return $http({
-				method: 'POST',
+				method: 'GET',
 				url: endpoint,
-				data: data
+				params: data
 			}).then(respData).catch(respError);
 		}
 
@@ -145,9 +145,13 @@
 		function gravar(url, obj) {
 			var endpoint = DB_URL + url + '/gravar';
 			var data = {};
-			data[this.type] = obj;
+			data.obj = obj;
 
-			return $http.post(endpoint, data).success(respData).catch(respError);
+			return $http({
+				method: 'POST',
+				url: endpoint,
+				params: obj
+			}).success(respData).catch(respError);
 		}
 
 		function apagar(url, ids) {

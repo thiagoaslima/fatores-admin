@@ -7,142 +7,156 @@
 		.constant('entidades', [
 			{
 				Nome: "Atividades",
-				Href: "Atividades",
+				Alias: 'atividades',
+				Href: "atividades",
 				UI: true,
-				ListOnSidebar: true
+				ListOnSidebar: true,
+				Hierarchical: true
 			},
 			{
 				Nome: "AtividadesTarefa",
-				Href: "AtividadesTarefa",
+				Alias: 'atividadesTarefa',
+				Href: "atividadestarefa",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "AtividadesEmpresa",
-				Href: "AtividadesEmpresa",
+				Alias: "atividadesEmpresa",
+				Href: "atividadesempresa",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Areas de Atuação",
-				Href: "AreasAtuacao",
+				Alias: 'areasAtuacao',
+				Href: "areasatuacao",
 				UI: true,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Empresas",
-				Href: "Empresas",
+				Alias: 'empresas',
+				Href: "empresas",
 				UI: true,
-				ListOnSidebar: true
+				ListOnSidebar: true,
+				Hierarchical: false
 			},
 			{
 				Nome: "Cenários",
-				Href: "Cenarios",
+				Alias: "cenarios",
+				Href: "cenarios",
 				UI: true,
-				ListOnSidebar: true
+				ListOnSidebar: true,
+				Hierarchical: false
 			},
 			{
 				Nome: "Relação Cenários e Dia",
-				Href: "CenariosDia",
+				Alias: "cenariosDia",
+				Href: "cenariosdia",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Relação Cenário e Valores",
-				Href: "CenarioValores",
+				Alias: "cenarioValores",
+				Href: "cenariovalores",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Funções",
-				Href: "Funcoes",
+				Alias: "funcoes",
+				Href: "funcoes",
 				UI: true,
 				ListOnSidebar: true
 			},
 			{
 				Nome: "Levantamentos",
-				Href: "Levantamentos",
+				Alias: "levantamentos",
+				Href: "levantamentos",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Obras",
-				Href: "Obras",
+				Alias: "obras",
+				Href: "obras",
 				UI: true,
-				ListOnSidebar: true
+				ListOnSidebar: false,
+				Hierarchical: true
 			},
 			{
 				Nome: "Portes de Empresas",
-				Href: "PortesEmpresa",
+				Alias: "portesEmpresa",
+				Href: "portesempresa",
 				UI: true,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Usuários",
-				Href: "Users",
-				UI: true,
-				ListOnSidebar: true
-			},
-			{
-				Nome: "IdentityUserClaims",
-				Href: "IdentityUserClaims",
+				Alias: "users",
+				Href: "users",
 				UI: false,
-				ListOnSidebar: false
-			},
-			{
-				Nome: "IdentityUserLogins",
-				Href: "IdentityUserLogins",
-				UI: false,
-				ListOnSidebar: false
-			},
-			{
-				Nome: "IdentityUserRoles",
-				Href: "IdentityUserRoles",
-				UI: false,
-				ListOnSidebar: false
-			},
-			{
-				Nome: "Produções",
-				Href: "Producoes",
-				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Serviços Prestados",
-				Href: "ServicosPrestados",
+				Alias: "servicosPrestados",
+				Href: "servicosprestados",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Setores de Atuacao",
-				Href: "SetoresAtuacao",
+				Alias: "setoresAtuacao",
+				Href: "setoresatuacao",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Tarefas",
-				Href: "Tarefas",
+				Alias: "tarefas",
+				Href: "tarefas",
 				UI: true,
-				ListOnSidebar: true
+				ListOnSidebar: true,
+				Hierarchical: false
 			},
 			{
 				Nome: "Padrões de Obra",
-				Href: "PadroesObra",
+				Alias: "padroesObra",
+				Href: "padroesobra",
 				UI: true,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "TiposObra",
-				Href: "TiposObra",
+				Alias: "tiposObra",
+				Href: "tiposobra",
 				UI: true,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			},
 			{
 				Nome: "Tokens",
-				Href: "Tokens",
+				Alias: "tokens",
+				Href: "tokens",
 				UI: false,
-				ListOnSidebar: false
+				ListOnSidebar: false,
+				Hierarchical: false
 			}
-		]);
-		
+		])
+		;
+
 })(angular);
