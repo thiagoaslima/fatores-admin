@@ -11,10 +11,15 @@
 			'items',
 			'hasPropertyFilter',
 			'buildHierarchyFilter',
+			'sortFilter',
 			ctrl
 		]);
 
-	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy) {
+	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy, sort) {
+
+		var nome = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		
+		items = sort(items, nome);
 
 		var propriedades = ['ObraId', 'AtividadeId'];
 		var prop = propriedades.filter(function(prop) {

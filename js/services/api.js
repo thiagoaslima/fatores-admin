@@ -21,7 +21,7 @@
 			this._awaiting = [];
 			this._await = _await;
 			this._play = _play;
-			this.functions = functions || ['save', 'update', 'get', 'query', 'delete', 'listar', 'detalhar', 'gravar', 'apagar'];
+			this.functions = functions || ['listar', 'detalhar', 'gravar', 'apagar'];
 			this.bindAPI(url);
 			return this;
 		}
@@ -32,11 +32,11 @@
 		 */
 		Object.cefen.defineMethods(API.prototype, [
 			bindAPI,
-			save,
-			update,
-			get,
-			query,
-			[erase, 'delete'],
+//			save,
+//			update,
+//			get,
+//			query,
+//			[erase, 'delete'],
 			// api .NET custom
 			gravar,
 			listar,
@@ -60,7 +60,7 @@
 			});
 			return this;
 		}
-
+/*
 		function save(url, obj) {
 			return $http({
 				method: 'POST',
@@ -91,10 +91,6 @@
 			});
 		}
 
-		function query(url, params) {
-			return get(url, null, params);
-		}
-
 		function erase(url, obj) {
 			return $http({
 				method: 'DELETE',
@@ -104,6 +100,10 @@
 				return resp.data.value || resp.data;
 			});
 		}
+*/
+//		function query(url, params) {
+//			return get(url, null, params);
+//		}
 
 		function bindAPI(address) {
 			var self = this;
@@ -113,6 +113,7 @@
 			Object.cefen.defineMethods(self, fns);
 			return self;
 		}
+		
 
 		/**
 		 * listar

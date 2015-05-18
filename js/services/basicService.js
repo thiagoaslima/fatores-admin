@@ -1,15 +1,15 @@
-;(function (angular, undefined) {
+; (function (angular, undefined) {
 	'use strict';
 
 	angular
 		.module('app.services')
 		.service('BasicService', [
-			'$q',
-			'API',
-			'isFilter',
-			'sortFilter',
-			srv
-		]);
+		'$q',
+		'API',
+		'isFilter',
+		'sortFilter',
+		srv
+	]);
 
 	function srv($q, API, is, sort) {
 
@@ -70,14 +70,10 @@
 			var createInstance = _createInstance.bind(_this);
 			var updateList = _updateList.bind(_this);
 
-			_this.api.listar(params).then(function(resp){
+			_this.api.listar(params).then(function (resp) {
 				defer.resolve(resp);
 			});
-			/*
-			var promise = _this.api.listar(params).then(createInstance);
-			var resp = $q.when(promise).then(updateList);
-			defer.resolve(resp);
-			*/
+
 			return defer.promise;
 		}
 
@@ -108,6 +104,9 @@
 			var retrieveInstance = get.bind(_this, id, {}, true);
 
 			return _this.api.gravar(obj)
+				.then(function(resp) {
+					return _this.api.detalhar(resp, {}, true);
+				})
 				.then(createInstance)
 				.then(updateList)
 				.then(returnInstance)
@@ -115,19 +114,7 @@
 		}
 
 		function update(obj) {
-			var _this = this;
-			var id = obj.Id;
-
-			var createInstance = _createInstance.bind(_this);
-			var updateList = _updateList.bind(_this);
-			var returnInstance = get.bind(_this, id);
-			var retrieveInstance = get.bind(_this, id, {}, true);
-
-			return _this.api.gravar(obj)
-				.then(createInstance)
-				.then(updateList)
-				.then(returnInstance)
-				.catch(retrieveInstance);
+			return this.save(obj);
 		}
 
 		function erase(obj) {
@@ -167,10 +154,10 @@
 			var _this = this;
 			array = is.array(array) ? array : [array];
 
-			array.forEach(function (empresa) {
-				_this.new(empresa);
+			array.forEach(function (entidade) {
+				_this.new(entidade);
 			});
-			
+
 			return array;
 		}
 
@@ -196,8 +183,8 @@
 			_this._list = sort(_list, _this.nameProp);
 			return _this._list;
 		}
-		
-			
+
+
 		function respData(resp) {
 			return (resp.data) ? resp.data.value || resp.data : resp;
 		}
@@ -205,7 +192,7 @@
 		function respError(error) {
 			return error;
 		}
-		
+
 		return BasicService;
 	}
 

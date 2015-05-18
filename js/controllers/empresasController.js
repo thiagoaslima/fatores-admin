@@ -7,16 +7,11 @@
 		.controller('empresasController', [
 			'$scope',
 			'$state',
-			'logger',
+			'$location',
 			'SIGLAS_ESTADOS',
 			'modelItem',
 			'empresasService',
-			'BasicController',
-			'areasAtuacaoService',
-			'portesEmpresaService',
-			'obrasService',
-			'tarefasService',
-			'buildHierarchyFilter',
+			'basicController',
 			'isFilter',
 			editarCtrl
 		]);
@@ -24,44 +19,42 @@
 	function editarCtrl(
 		$scope,
 		$state,
-		logger,
+		$location,
 		estados,
 		empresa,
-		empresas,
+		empresasService,
 		basicController,
-		areasAtuacaoSrv,
-		portesEmpresaSrv,
-		obrasSrv,
-		tarefasSrv,
-		buildHierarchy,
-		is) {
+		is 
+		) {
 
 		var ctrl = this;
 		var _update = false;
-		
-		var deps = ['areasAtuacao', 'portesEmpresa', 'tarefas'];
-		basicController.getDeps($scope, deps);
 
-		var hierarchical = [{
-			entidade: 'obras',
-			prop: 'ObraId'	
-		}];
-		basicController.getHierarchicalDeps($scope, hierarchical);
-
-		angular.extend($scope, {
-			estados: estados,
-			empresa: empresa
-		});
+		$scope.estados = estados;
+		$scope.empresa = empresa;
 
 		// botoes
 		$scope.btn = {
 			salvar: true,
 			apagar: true
 		};
+		
+		ctrl.gravar = function ctrlgravar() {
+			return basicController.gravar(empresasService, empresa);
+		};
 
 		init();
 
 		function init() {
+			var deps = ['areasAtuacao', 'portesEmpresa', 'tarefas'];
+			basicController.getDeps($scope, deps);
+	
+			var hierarchical = [{
+				entidade: 'obras',
+				prop: 'ObraId'	
+			}];
+			basicController.getHierarchicalDeps($scope, hierarchical);
+			
 			if (is.object(empresa) && empresa.Id && empresa.Id !== 0) {
 				_update = true;
 			} else {
@@ -71,36 +64,10 @@
 			}
 		}
 
-		var msgs = {
-			sucesso: 'A obra ' + empresa.RazaoSocial + ' foi atualizada com sucesso!',
-			erro: 'Não foi possível atualizar a empresa' + empresa.RazaoSocial + 
-				'. Tente novamente mais tarde.'
-		};
-
-		ctrl.gravar = function () {
-
-			if (!_update) {
-				return empresas.save(empresa)
-					.then(redirect)
-					.then(showSuccess.bind(null, msgs.sucesso))
-					.catch(showError.bind(null, msgs.erro));
-			}
-
-			return empresas.update(empresa)
-				.then(showSuccess.bind(null, msgs.sucesso))
-				.catch(showError.bind(null, msgs.erro));
-		};
-
-		ctrl.delete = function () {
-			return empresas.delete(empresa)
-				.then(showSuccess)
-				.catch(showError);
-		};
-
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 
-		function redirect(resp) {
+		/*function redirect(resp) {
 			// se o $scope possuir a propriedade submodelId
 			// estamos na view do submodel
 			if ($scope.submodelId) {
@@ -110,17 +77,7 @@
 			}
 
 			return resp;
-		}
-
-		function showSuccess(msg, resp) {
-//			logger.sucess(msg);
-			return resp;
-		}
-
-		function showError(msg, resp) {
-//			logger.error(msg);
-			return resp;
-		}
+		}*/
 
 		return ctrl;
 	}
