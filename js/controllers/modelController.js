@@ -1,3 +1,4 @@
+/* globals angular:false*/
 ;
 (function (angular, undefined) {
 	'use strict';
@@ -12,10 +13,11 @@
 			'hasPropertyFilter',
 			'buildHierarchyFilter',
 			'sortFilter',
+			'filterFilter',
 			ctrl
 		]);
 
-	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy, sort) {
+	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy, sort, filter) {
 
 		var nome = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
 		
@@ -29,6 +31,15 @@
 		if (prop) {
 			items = buildHierarchy(items, prop);
 		}
+		
+		var prop = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		$scope.$watch('filtrarModel', function (value, oldValue) {	
+			if (value !== oldValue) {
+				var obj = {};
+				obj[prop] = value;
+				$scope.items = filter(items, obj);
+			}
+		});
 
 		angular.extend($scope, {
 			items: items,

@@ -1,0 +1,14 @@
+<div ng-if="!!selectSearch" class="select-relation__search">
+  <input type="search" />
+</div>
+
+<div class="select-relation__list">
+  <div class="select-relation__unidade" ng-repeat="item in ::selectItems">
+    <input type="radio" id="{{select.name}}_$index" ng-model="select.ngModel" ng-value="item.Id">
+    <label for="{{select.name}}_$index">{{item[select.nameProp]}}</label>
+  </div>
+
+  <div class="select-relation__unidade">
+    <a data-ui-sref="submodel({})"
+</div>
+</div>

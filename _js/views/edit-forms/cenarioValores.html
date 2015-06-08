@@ -1,0 +1,36 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="cenarioValores.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="cenarioValores.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+
+  <form name="dadosAtividade" id="dadosAtividade" novalidate ng-submit="cenarioValores.gravar()">
+    <!--Id-->
+
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+
+      <div class="inline-elements">
+	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="cenarioValor.Status" /><label for="label_true">Ativa</label>
+	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="cenarioValor.Status" /><label for="label_false">Inativa</label>
+      </div>
+    </div>
+
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="cenarioValor.Nome" />
+    </div>
+    
+    <!--Descrição-->
+    <div class="form-group">
+      <label class="label__section" for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" ng-model="cenarioValor.Descricao"></textarea>
+    </div>
+	
+  </form>
+</div>

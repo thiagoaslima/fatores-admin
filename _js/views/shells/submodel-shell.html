@@ -1,0 +1,37 @@
+<div class="modulo-edicao">
+  <div class="modulo-edicao__sidebar">
+
+    <div class="modulo-edicao__topo">
+      <h1>{{submodel}}</h1>
+    </div>
+
+    <div class="modulo-edicao__corpo">
+      <ul class="lista-entidades">
+	<li class="menu-entidades-btn">
+	  <a class="btn" data-ui-sref-active="btn-active" 
+	     data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: 'nova'})">Criar novo</a>
+	</li>
+  
+  <li>
+    <input type="search" ng-model='filtrarSubmodel' placeholder="filtrar {{submodel.toLowerCase()}}" style="width:7em;min-width:1em;outline:1px solid lightgrey;margin-bottom: 1em;"/>
+  </li>
+
+	<li class="entidade" ng-repeat="item in items">
+	  <a data-ui-sref-active='active' 
+	     data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: item.Id})">{{::(item.Nome|| item.RazaoSocial)}}</a>
+
+	  <ul class="sub-lista-entidades" ng-if="item.children && item.children.length"> 
+	    <li class="menu-entidades-btn" ng-repeat="child in ::item.children">
+	      <a data-ui-sref-active='active' 
+		 data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: child.Id})">{{::(child.Nome|| child.RazaoSocial)}}</a>
+	    </li>
+	  </ul>
+	</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!--<div class="modulo-edicao__formulario" ng-if="!!submodelId" ng-include="formUrl(submodel)"></div>-->
+  <div class="modulo-edicao__formulario" ng-if="!!submodelId" data-ui-view="formulario2"></div>
+</div>

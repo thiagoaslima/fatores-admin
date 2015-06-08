@@ -39,8 +39,12 @@
 			apagar: true
 		};
 		
-		ctrl.gravar = function ctrlgravar() {
+		ctrl.gravar = function ctrlGravar() {
 			return basicController.gravar(empresasService, empresa);
+		};
+		
+		ctrl.delete = function ctrlApagar() {
+			return basicController.apagar(empresasService, empresa);	
 		};
 
 		init();
@@ -64,10 +68,25 @@
 			}
 		}
 
+//		ctrl.gravar = function () {
+//			return empresas.save(empresa)
+//				.then(function(resp) {
+//					reload(resp.Id);	
+//					showSuccess.bind(null, msgs.sucesso);
+//				})
+//				.catch(showError.bind(null, msgs.erro));
+//		};
+//
+//		ctrl.delete = function () {
+//			return empresas.delete(empresa)
+//				.then(showSuccess)
+//				.catch(showError);
+//		};
+
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 
-		/*function redirect(resp) {
+		function redirect(resp) {
 			// se o $scope possuir a propriedade submodelId
 			// estamos na view do submodel
 			if ($scope.submodelId) {
@@ -77,7 +96,7 @@
 			}
 
 			return resp;
-		}*/
+		}
 
 		return ctrl;
 	}

@@ -9,6 +9,7 @@
 		'$location',
 		'$injector',
 		'buildHierarchyFilter',
+		'sortFilter',
 		'isFilter',
 		service
 	]);
@@ -18,12 +19,14 @@
 		$location,
 		$injector,
 		buildHierarchy,
+		sort,
 		is
 		) {
 
 		var Controller = {
 			getDeps: getDependencies,
 			getHierarchicalDeps: getHierarchicalDependencies,
+			getChildDeps: getChildDeps,
 
 			gravar: gravar,
 			apagar: apagar
@@ -37,7 +40,10 @@
 			services.forEach(function (service, index) {
 				var entidade = array[index];
 				service.query().then(function (resp) {
-					scope[entidade] = resp;
+					if (resp && resp.length) {
+						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						scope[entidade] = sort(resp, name);	
+					} 
 				});
 			});
 		}
@@ -54,7 +60,35 @@
 			entidades.map(injectService).forEach(function (service, index) {
 				var entidade = entidades[index];
 				service.query().then(function (resp) {
-					scope[entidade] = buildHierarchy(resp, props[index]);
+					if (resp && resp.length) {
+						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						resp = sort(resp, name);
+						scope[entidade] = buildHierarchy(resp, props[index]);	
+					}
+				});
+			});
+		}
+		
+		function getChildDeps(scope, array, id) {
+			var entidades = [];
+			var props = [];
+
+			array.forEach(function (obj) {
+				entidades.push(obj.entidade);
+				props.push(obj.prop);
+			});
+
+			entidades.map(injectService).forEach(function (service, index) {
+				var entidade = entidades[index];
+				var prop = props[index];
+				service.query().then(function (resp) {
+					if (resp && resp.length) {
+						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						resp = resp.filter(function (item) {
+							return item[prop] === id;
+						});
+						scope[entidade] = sort(resp, name);
+					}
 				});
 			});
 		}
@@ -78,12 +112,12 @@
 		}
 		
 		function reload(id) {
-//			var path = $location.path();
-//			if (path.indexOf('nova') > -1) {
-//				$location.path(path.replace('nova', id));
-//			} else {
+			var path = $location.path();
+			if (path.indexOf('nova') > -1 && !!id) {
+				$location.path(path.replace('nova', id));
+			} else {
 				$state.reload();	
-//			}
+			}
 		}
 
 		return Controller;

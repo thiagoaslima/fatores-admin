@@ -8,6 +8,8 @@
 			'ngMessages',
 			
 			'checklist-model',
+			'angularModalService',
+			
 			'ui.bootstrap',
 			'ui.router'
 		])

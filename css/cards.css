@@ -1,0 +1,17 @@
+.card {
+  position: relative;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 0.75em 0.2em;
+}
+
+.card__valores {
+  /* position: absolute; */
+  /* width: 100%; */
+  /* top: 100%; */
+  /* left:0; */
+  /* border: 1px solid rgb(230, 230, 230); */
+  border-top: 1px dashed white;
+  padding: 1em;
+  background-color: white;
+  z-index: 9;
+}

@@ -7,27 +7,46 @@
 
     <div class="modulo-edicao__corpo">
       <ul class="lista-entidades">
-	<li class="menu-entidades-btn">
-	  <a class="btn" data-ui-sref-active="btn-active" 
-	     data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: 'nova'})">Criar novo</a>
-	</li>
+        
+      	<li class="menu-entidades-btn">
+      	  <a class="btn" data-ui-sref-active="btn-active" 
+      	     data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: 'nova'})">Criar novo</a>
+      	</li>
+        
+        <li class="menu-entidades-btn inline-elements">
+          <input type="search" ng-model='filtrarSubmodel' placeholder="filtrar {{submodel.toLowerCase()}}" style="margin-left: 0.5em;min-width:1em;outline:1px solid lightgrey;margin-bottom: 1em;"/>
+        </li>
+        
+        <li class="entidade" ng-repeat="item in items">
+          <collapse-button ng-if="item.children" scope-prop="item{{::item.Id}}Collapse" starts-closed></collapse-button>
+          <a data-ui-sref-active='active' data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: item.Id})">{{::(item.Nome|| item.RazaoSocial)}}</a>
+          <ul class="sub-lista-entidades" collapse="item{{::item.Id}}Collapse" ng-if="item.children && item.children.length" ng-repeat="child1 in ::item.children">
+            <li class="menu-entidades-name">
+              <collapse-button ng-if="child1.children" scope-prop="item{{::child1.Id}}Collapse" starts-closed></collapse-button>
+              <a data-ui-sref-active='active' data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: child1.Id})">{{::(child1.Nome|| child1.RazaoSocial)}}</a>
+            </li>
+            <ul class="sub-lista-entidades" collapse="item{{::child1.Id}}Collapse" ng-if="child1.children && child1.children.length"
+            ng-repeat="child2 in ::child1.children">
+              <li class="menu-entidades-name">
+                <collapse-button ng-if="child2.children" scope-prop="item{{::child2.Id}}Collapse" starts-closed></collapse-button>
+                <a data-ui-sref-active='active' data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: child2.Id})">{{::(child2.Nome|| child2.RazaoSocial)}}</a>
+              </li>
+              <ul class="sub-lista-entidades" collapse="item{{::child2.Id}}Collapse" ng-if="child2.children && child2.children.length"
+              ng-repeat="child3 in ::child2.children">
+                <li class="menu-entidades-name">
+                  <collapse-button ng-if="child3.children" scope-prop="item{{::child3.Id}}Collapse" starts-closed></collapse-button>
+                  <a data-ui-sref-active='active' data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: child3.Id})">{{::(child3.Nome|| child3.RazaoSocial)}}</a>
+                </li>
+              </ul>
+            </ul>
+          </ul>
+        </li>
 
-	<li class="entidade" ng-repeat="item in ::items">
-	  <a data-ui-sref-active='active' 
-	     data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: item.Id})">{{::(item.Nome|| item.RazaoSocial)}}</a>
-
-	  <ul class="sub-lista-entidades" ng-if="item.children && item.children.length"> 
-	    <li class="menu-entidades-btn" ng-repeat="child in ::item.children">
-	      <a data-ui-sref-active='active' 
-		 data-ui-sref="submodel({model:model, id:modelId, submodel:submodel, subid: child.Id})">{{::(child.Nome|| child.RazaoSocial)}}</a>
-	    </li>
-	  </ul>
-	</li>
+	
       </ul>
     </div>
 
   </div>
-
-  <!--<div class="modulo-edicao__formulario" ng-if="!!submodelId" ng-include="formUrl(submodel)"></div>-->
+  
   <div class="modulo-edicao__formulario" ng-if="!!submodelId" data-ui-view="formulario2"></div>
 </div>

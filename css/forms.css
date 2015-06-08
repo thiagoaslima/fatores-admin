@@ -2,6 +2,7 @@
 
 .form-group {
     position: relative;
+    overflow: hidden;
 }
 
 fieldset {
@@ -69,6 +70,11 @@ input + label {
     font-size: 0.6875em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+.label-icon {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: middle;
 }
 
 input[type="text"],
@@ -142,4 +148,26 @@ input[type="password"] {
 .parent + .parent {
     padding-top: 0.75em;
     border-top: 1px solid rgb(220, 220, 220);
+}
+
+.colunas {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: baseline;
+}
+.colunas > div {
+  padding: 0 1em;
+  flex-grow: 1;
+}
+.colunas > div:first-child {
+  padding-left: 0;
+}
+.colunas > div:last-child {
+  padding-right: 0;
+}
+
+.coluna__header {
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  font-weight: 700;
 }

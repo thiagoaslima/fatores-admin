@@ -5,6 +5,7 @@
 	angular
 		.module('app.models')
 		.controller('obrasController', [
+			'$q',
 			'$scope',
 			'$state',
 			'logger',
@@ -14,11 +15,17 @@
 			'padroesObraService',
 			'tiposObraService',
 			'empresasService',
+			'cenariosService',
+			'cenarioValoresService',
+			'ModalService',
+			'CardService',
+			'sortFilter',
 			'isFilter',
 			editarCtrl
 		]);
 
 	function editarCtrl(
+		$q,
 		$scope,
 		$state,
 		logger,
@@ -28,10 +35,16 @@
 		padroesSrv,
 		tiposSrv,
 		empresasSrv,
+		cenariosService,
+		cenarioValoresService,
+		ModalService,
+		CardService,
+		sort,
 		is) {
 
 		var ctrl = this;
 		var _update = false;
+		var Card = CardService;	
 		
 		$scope.estados = estados;
 		$scope.obra = obra;
@@ -89,6 +102,80 @@
 			return service.delete(obra)
 				.then(showSuccess)
 				.catch(showError);
+		};
+		
+		
+		/* Cenarios & CenariosValor */
+		var _cenarios = cenariosService.query();
+		var _cenarioValores = cenarioValoresService.query();
+
+		var mediator = {};
+		$q.all({
+			cenarios: _cenarios,
+			valores: _cenarioValores
+		}).then(function (obj) {
+			var map = {};
+			var mapValores = {};
+			var cenarios = [];
+
+			obj.cenarios.forEach(function (cenario) {
+				cenario.CenarioValores = [];
+				map[cenario.Id] = Object.create(Card, {
+					Id: { value: cenario.Id },
+					Nome: { value: cenario.Nome.toLowerCase() },
+					Model: { value: obra }
+				});
+				map[cenario.Id].Cenario = cenario;
+			});
+
+			obj.valores.forEach(function (valor) {
+				var id = valor.CenarioId;
+				mapValores[valor.Id] = valor;
+				map[id].Cenario.CenarioValores.push(valor);
+			});
+
+			obra.CenariosValor.forEach(function (value) {
+				var card = map[mapValores[value].CenarioId];
+
+				if (card.Type === 'none') {
+					card.Type = 'cenario';
+				}
+
+				if (card.Type !== 'none' && card.Type !== 'cenario') {
+					throw new Error('O mesmo cenario ' + card.cenario.Nome + '(' + card.cenario.Id + ') está definido como atributo e como cenário');
+				}
+
+				card.Valores = card.Valores.concat(value);
+			});
+
+			cenarios = Object.keys(map).map(function (id) {
+				var card = map[id];
+				card.Cenario.CenarioValores = sort(card.Cenario.CenarioValores, 'Nome');
+				return card;
+			});
+
+			mediator.Cenarios = sort(cenarios, 'Nome');
+			$scope.mediator = mediator;
+			window.mediator = mediator;
+			return { Cenarios: cenarios };
+		});
+		
+		// Modal Service
+		// --------------------------------------------------
+		
+		$scope.showModal = function (card) {
+			// Just provide a template url, a controller and call 'showModal'.
+			ModalService.showModal({
+				templateUrl: "js/views/modals/cenario-cenarioValor.html",
+				controller: "cardModalController",
+				inputs: {
+					card: card
+				}
+			}).then(function(modal) {
+//			    modal.close.then(function(result) {
+//			      console.log(result);
+//			    });
+		  });
 		};
 
 		// ---------------------------------------------------------------

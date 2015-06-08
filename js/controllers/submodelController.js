@@ -8,16 +8,45 @@
                 '$scope',
                 '$stateParams',
                 'APP_URLS',
-                'subitems',
+				'subitems',
+				'buildHierarchyFilter',
+				'containsFilter',
+				'filterFilter',
+				'sortFilter',
                 ctrl
             ]);
 
-    function ctrl($scope, params, URLS, items) {
+    function ctrl($scope, params, URLS, items, buildHierarchy, contains, filter, sort) {
 		
-		var propriedades = ['ObraId'];
+		var nome = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		items = sort(items, nome);
+		
+		var filteredEntities = [{
+			entidade: 'obras',
+			prop: 'ObraId'
+		}, {
+			entidade: 'cenarioValores',
+			prop: 'CenarioId'
+		}, {
+			entidade: 'atividades',
+			prop: 'AtividadeId'
+		}];
+		var filtered = contains(filteredEntities, params.submodel);  
+		
+		if (filtered >= 0) {
+			var prop = filteredEntities[filtered].prop;
+			var id = parseInt(params.id, 10);
+			
+			items = items.filter(function(item) {
+				return item[prop] === id; 
+			});
+		}
+		
+		
+		var propriedades = ['ObraId', 'AtividadeId'];
 		var prop = propriedades.filter(hasProperty)[0];
 	
-		if (prop) {
+		if (!!prop) {
 			items = buildHierarchy(items, prop);
 		}
 		
@@ -35,6 +64,16 @@
             }
         });
 		
+		var prop = items[0] && items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		$scope.$watch('filtrarSubmodel', function (value, oldValue) {	
+			if (value !== oldValue) {
+				var obj = {};
+				obj[prop] = value;
+				
+				$scope.items = filter(items, obj);
+			}
+		})
+		
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 
@@ -42,28 +81,23 @@
 			return items && items[0] &&
 				items[0].hasOwnProperty(prop) ? prop : false;
 		}
-
-		function buildHierarchy(items, prop) {
-			var lista = {};
-
-			items.forEach(function (item) {
-				if (item[prop]) {
-					lista[item[prop]] = lista[item[prop]] || {};
-					var parent = lista[item[prop]];
-					parent.children = parent.children || [];
-					parent.children.push(item);
-				} else {
-					var children = lista[item.Id] ? lista[item.Id].children.slice() : [];
-					lista[item.Id] = item;
-					lista[item.Id].children = children;
+		
+		function contains(array, value) {
+			value = value.toLowerCase();
+			
+			var index = -1;
+			array.map(function(item) {
+				return item.entidade.toLowerCase();
+			}).forEach(function(name, idx) {
+				if (index >= 0) {
+					return;
+				}
+				if (name === value) {
+					index = idx;
 				}
 			});
-
-			return Object.keys(lista).map(function (item) {
-				return lista[item];
-			}).filter(function (obj) {
-				return obj.hasOwnProperty(prop) && !obj[prop];
-			})
+			
+			return index;
 		}
 	}
 })(angular);

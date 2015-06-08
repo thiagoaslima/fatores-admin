@@ -1,0 +1,210 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="tarefas.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="tarefas.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+  
+  <form name="dadosObra" id="dadosObra" novalidate ng-submit="tarefas.gravar()">
+  
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+      <div class="inline-elements">
+        <input type="radio" id="status_true" name="status" ng-value="true" ng-model="tarefa.Status" />
+        <label for="status_true">Ativa</label>
+        <input type="radio" id="status_false" name="status" ng-value="false" ng-model="tarefa.Status" />
+        <label for="status_false">Inativa</label>
+      </div>
+    </div>
+  
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="tarefa.Nome" />
+    </div>
+  
+    <!--Descricao-->
+    <div class="form-group">
+      <label class="label__section" for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" ng-model="tarefa.Descricao"></textarea>
+    </div>
+    
+    <!--UnidadeMedida-->
+    <div class="form-group">
+      <label class="label__section" for="unidademedida1">Unidade de medida principal</label>
+      <input type="text" id="unidademedida1" name="unidademedida1" ng-model="tarefa.UnidadeMedida"
+      />
+    </div>
+    
+    <!--UnidadeMedida2-->
+    <div class="form-group">
+      <label class="label__section" for="unidademedida2">Unidade de medida secundária</label>
+      <input type="text" id="unidademedida2" name="unidademedida2" ng-model="tarefa.UnidadeMedida2"
+      />
+    </div>
+    
+    <!--UnidadeMedida3-->
+    <div class="form-group">
+      <label class="label__section" for="unidademedida3">Unidade de medida terciária</label>
+      <input type="text" id="unidademedida3" name="unidademedida3" ng-model="tarefa.UnidadeMedida3"
+      />
+    </div>
+    
+    <!--LevantamentoCiclico-->
+    <div class="form-group">
+      <label class="label__section" for="levantamentociclico">Levantamento Cíclico</label>
+      <div class="inline-elements">
+        <input type="radio" id="levantamentociclico_true" name="levantamentociclico" ng-value="true" ng-model="tarefa.LevantamentoCiclico"
+        />
+        <label for="levantamentociclico_true">Sim</label>
+        <input type="radio" id="levantamentociclico_false" name="levantamentociclico" ng-value="false" ng-model="tarefa.LevantamentoCiclico"
+        />
+        <label for="levantamentociclico_false">Não</label>
+      </div>
+    </div>
+    
+    <!--Ciclica-->
+    <div class="form-group" ng-if="tarefa.LevantamentoCiclico">
+      <label class="label__section" for="ciclica">Tarefa Cíclica</label>
+      <div class="inline-elements">
+        <input type="radio" id="ciclica_true" name="ciclica" ng-value="true" ng-model="tarefa.Ciclica" />
+        <label for="ciclica_true">Sim</label>
+        <input type="radio" id="ciclica_false" name="ciclica" ng-value="false" ng-model="tarefa.Ciclica" />
+        <label for="ciclica_false">Não</label>
+      </div>
+    </div>
+    
+    <!--DiasCiclo-->
+    <div class="form-group" ng-if="tarefa.LevantamentoCiclico">
+      <label class="label__section" for="diasciclo">Dias do Ciclo</label>
+      <input type="number" id="diasciclo" name="diasciclo" ng-model="tarefa.DiasCiclo" />
+    </div>
+    
+    <!--CicloVariavel-->
+    <div class="form-group" ng-if="tarefa.LevantamentoCiclico">
+      <label class="label__section" for="status">Ciclo Variavel</label>
+      <div class="inline-elements">
+        <input type="radio" id="ciclovariavel_true" name="ciclovariavel" ng-value="true" ng-model="tarefa.CicloVariavel" />
+        <label for="levantamentociclico_true">Sim</label>
+        <input type="radio" id="ciclovariavel_false" name="ciclovariavel" ng-value="false" ng-model="tarefa.CicloVariavel"
+        />
+        <label for="levantamentociclico_false">Não</label>
+      </div>
+    </div>
+    
+    <!--Funcoes-->
+    <div class="form-group">
+      <div class='inline-elements'>
+        <label class="label__section" for="Funcoes">Funcões necessárias para executar a tarefa</label>
+        <a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'funcoes', subid: null})">
+      	  <svg class="form-icon">
+      	  <use xlink:href="#edit" />
+      	  </svg>
+      	  <small>Editar Funções associadas à Tarefa</small>
+      	</a>
+      </div>
+      <div class='inline-elements' ng-repeat="funcao in funcoes">
+        <input id="funcao_{{::funcao.Id}}" type="checkbox" name="funcoes" checklist-model="tarefa.Funcoes" checklist-value="funcao.Id">
+        <label for="funcao_{{::funcao.Id}}">{{::funcao.Nome}}</label>
+      </div>
+    </div>
+    
+    
+    <!--Cenarios fieldset-->
+    <fieldset>
+      <legend>Cenários e atributos</legend>
+      
+      <div class="form-group">
+        <div class="controles">
+          <div class="inline-elements">
+            <label for="cenarios_search">
+              <svg class="label-icon">
+                <use xlink:href="#search"></use>
+              </svg>
+            </label>
+            <div>
+              <input type="search" placeholder="buscar cenários e/ou atributos" id="cenarios_search" ng-model="search.cenarios"></div>
+            </div>
+        </div>
+      </div>
+    </fieldset>
+    
+    <!--Cenarios-->
+    <div class="form-group">
+      <div class='inline-elements'>
+        <label class="label__section" for="AreaAtuacaoId">Cenários que influenciam a tarefa</label>
+        <a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'cenarios', subid: null})">
+      	  <svg class="form-icon">
+      	  <use xlink:href="#edit" />
+      	  </svg>
+      	  <small>Editar Cenários associados à Tarefa</small>
+      	</a>
+      </div>
+      
+      
+          	<div class="card cenario__{{card.Type}}" ng-repeat="card in mediator.Cenarios">
+              <label>{{card.Cenario.Nome}}</label>
+              
+              <div>
+                <div class="inline-elements">
+                  <input type="radio" id="card_atributo_{{card.Cenario.Id}}" ng-model="card.Type" value="atributo" />
+                  <label for="card_atributo_{{card.Cenario.Id}}">Atributo</label>
+                </div>
+                
+                <div class="inline-elements">
+                  <input type="radio" id="card_cenario_{{card.Cenario.Id}}" ng-model="card.Type" value="cenario" />
+                  <label for="card_cenario_{{card.Cenario.Id}}">Cenário</label>
+                </div>
+                
+                <div class="inline-elements">
+                  <input type="radio" id="card_none_{{card.Cenario.Id}}" ng-model="card.Type" value="none" />
+                  <label for="card_none_{{card.Cenario.Id}}">Nenhum</label>
+                </div>
+                
+                <div ng-click="mostrar = !mostrar">
+                  <small ng-if="card.Type !== 'none'">
+                    mostrar {{card.Type}}</small>
+                </div>
+              </div>
+              
+              
+              
+              <div class="card__valores" ng-show="mostrar">
+                <div>
+                  <small ng-click="mostrar=!mostrar">recolher {{card.Type}}</small>
+                </div>
+                
+                <div class="inline-elements" ng-repeat="valores in card.Cenario.CenarioValores">
+                  <input type="checkbox" checklist-model="card.Valores" checklist-value="valores.Id" />
+                  <label>{{valores.Nome}}</label>
+                </div>
+              </div>
+            </div>
+        
+          
+        </div>
+        
+      </div>
+    </div>
+    
+    <!--Atributos-->
+    <div class="form-group">
+      <div class='inline-elements'>
+        <label class="label__section" for="AreaAtuacaoId">Atributos da Produção</label>
+        <a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'cenarios', subid: null})">
+      	  <svg class="form-icon">
+      	  <use xlink:href="#edit" />
+      	  </svg>
+      	  <small>Editar Atributos</small>
+      	</a>
+      </div>
+      <div class='inline-elements' ng-repeat="cenario in atributos">
+        <input id="cenario_{{::cenario.Id}}" type="checkbox" name="funcoes" checklist-model="tarefa.AtributosProducao" checklist-value="cenario.Id">
+        <label for="cenario_{{::cenario.Id}}">{{::cenario.Nome}}</label>
+      </div>
+    </div>
+  </form>
+</div>

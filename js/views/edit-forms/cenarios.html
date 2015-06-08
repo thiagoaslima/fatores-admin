@@ -1,0 +1,68 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="cenarios.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="cenarios.delete()">Apagar</button>
+  </div>
+</div>
+<div class="modulo-edicao__corpo">
+  <form name="dadosCenario" id="dadosCenario" novalidate ng-submit="cenarios.gravar()">
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+      <div class="inline-elements">
+        <input type="radio" id="status_true" name="status" ng-value="true" ng-model="cenario.Status" />
+        <label for="label_true">Ativa</label>
+        <input type="radio" id="status_false" name="status" ng-value="false" ng-model="cenario.Status" />
+        <label for="label_false">Inativa</label>
+      </div>
+    </div>
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="cenario.Nome" />
+    </div>
+    <!--Descrição-->
+    <div class="form-group">
+      <label class="label__section" for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" ng-model="cenario.Descricao"></textarea>
+    </div>
+    <!--Obrigatório-->
+    <div class="form-group">
+      <label class="label__section" for="peso">Obrigatório</label>
+      <div class="inline-elements">
+        <input type="radio" id="status_true" name="status" ng-value="true" ng-model="cenario.Obrigatorio" />
+        <label for="label_true">Sim
+          <small>(O técnico deverá declará-lo ao menos uma vez ao longo do dia de acompanhamento)</small>
+          </input>
+          </input>
+        </label>
+      </div>
+      <div class="inline-elements">
+        <input type="radio" id="status_false" name="status" ng-value="false" ng-model="cenario.Obrigatorio" />
+        <label for="label_false">Não
+          <small>(O técnico poderá não lançar este cenário)</small>
+        </label>
+      </div>
+    </div>
+    
+    <!--Valores-->
+    <div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="obras">Valores</label>
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'cenarioValores', subid: null})">
+				  <svg class="form-icon">
+				  <use xlink:href="#edit" />
+				  </svg>
+				  <small>Editar Valores do Cenário</small>
+				</a>
+			</div>
+			<ul class='parent' ng-repeat="valor in cenarioValores">
+				<li class='inline-elements'>
+					<input id="valor_{{::valor.Id}}" type="checkbox" name="valores" checklist-model="cenario.Valores" checklist-value="valor.Id">
+					<label for="valor_{{::valor.Id}}">{{::valor.Nome}}</label>
+				</li>
+      </ul>
+    </div>
+    
+  </form>
+</div>

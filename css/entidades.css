@@ -7,17 +7,20 @@
 .sub-lista-entidades {
     margin-top: 1.2em;
     list-style-type: none;
-    padding: 0 0 0 0.5em;
+    padding: 0 0 0 1em;
     color: #444444;
 }
 
 .entidade {
+    position: relative;
     font-size: 0.875em;
     border-bottom: 1px solid rgb(220, 220, 220);
-    padding: 0.75em 0;
+    padding: 0.75em 0.5em 0.75em 1.5em;
+    overflow: hidden;
 }
 .entidade a {
     display: inline-block;
+    /* width: 100%; */
 }
 
 .entidade .sub-lista-entidades a {
@@ -39,4 +42,23 @@
 
 .menu-entidades-btn {
     margin-bottom: 1.2em;
+    text-align: center;
+}
+.menu-entidades-name {
+    margin-bottom: 0.5em;
+}
+
+.sub-lista-entidades.collapse {
+    padding: 0em;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.sub-lista-entidades.collapse collapse-button {
+    display: none;
+}
+
+.entidade collapse-button {
+    position: absolute;
+    margin-left: -1.5em;
 }

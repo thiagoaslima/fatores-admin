@@ -1,0 +1,44 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="modal-close" ng-click="closeModal(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{::card.Cenario.Nome}}</h4>
+      </div>
+      
+      <div class="modal-body colunas">
+          <div>
+              <div class="inline-elements">
+                <input type="radio" id="card_atributo_{{::card.Cenario.Id}}" ng-model="card.Type" value="atributo" />
+                <label for="card_atributo_{{::card.Cenario.Id}}">Atributo</label>
+              </div>
+              
+              <div class="inline-elements">
+                <input type="radio" id="card_cenario_{{::card.Cenario.Id}}" ng-model="card.Type" value="cenario" />
+                <label for="card_cenario_{{::card.Cenario.Id}}">Cenário</label>
+              </div>
+              
+              <div class="inline-elements">
+                <input type="radio" id="card_none_{{::card.Cenario.Id}}" ng-model="card.Type" value="none" />
+                <label for="card_none_{{::card.Cenario.Id}}">Nenhum</label>
+              </div>
+          </div>
+          
+          
+          <div>
+              
+              <div class="inline-elements" ng-repeat="valor in card.Cenario.CenarioValores track by valor.Id">
+                <input type="checkbox" id="valor__{{::valor.Id}}" checklist-model="card.Valores" checklist-value="valor.Id" />
+                <label for="valor__{{::valor.Id}}">{{::valor.Nome}}</label>
+              </div>
+          </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" ng-click="closeModal(true)" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
