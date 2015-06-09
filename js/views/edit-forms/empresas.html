@@ -125,38 +125,66 @@
 		<div class="form-group">
 			<div class='inline-elements'>
 				<label class="label__section" for="obras">Obras</label>
-				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: null})">
+				<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: 'nova'})">
 				  <svg class="form-icon">
 				  <use xlink:href="#edit" />
 				  </svg>
-				  <small>Editar Obras</small>
+				  <small>Nova Obra</small>
 				</a>
 			</div>
 			<ul class='parent' ng-repeat="obra in obras">
 				<li class='inline-elements'>
 					<collapse-button ng-if="obra.children" scope-prop="obras{{::obra.Id}}Collapse" starts-closed></collapse-button>
 					<input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="obra.Id">
-					<label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
+					<label for="obra_{{::obra.Id}}">{{::obra.Nome}} 
+						<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: obra.Id})">
+						  <svg class="form-icon">
+						  <use xlink:href="#edit" />
+						  </svg>
+						  <small>Editar</small>
+						</a>
+					</label>
 				</li>
 				
 				<ul class='child' collapse="obras{{::obra.Id}}Collapse" class="children" ng-if='obra.children' ng-repeat="child1 in obra.children">
 					<li class='inline-elements'>
 						<collapse-button ng-if="child1.children" scope-prop="obras{{::child1.Id}}Collapse" starts-closed></collapse-button>
 						<input id="obra_{{::child1.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child1.Id">
-						<label for="obra_{{::child1.Id}}">{{::child1.Nome}}</label>
+						<label for="obra_{{::child1.Id}}">{{::child1.Nome}}
+							<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: child1.Id})">
+							  <svg class="form-icon">
+							  <use xlink:href="#edit" />
+							  </svg>
+							  <small>Editar</small>
+							</a>
+						</label>
 					</li>
 					
 					<ul class='child' collapse="obras{{::child1.Id}}Collapse" class="children" ng-if='child1.children' ng-repeat="child2 in child1.children">
 						<li class='inline-elements'>
 							<collapse-button ng-if="child2.children" scope-prop="obras{{::child2.Id}}Collapse" starts-closed></collapse-button>
 							<input id="obra_{{::child2.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child2.Id">
-							<label for="obra_{{::child2.Id}}">{{::child2.Nome}}</label>
+							<label for="obra_{{::child2.Id}}">{{::child2.Nome}}
+								<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: child2.Id})">
+								  <svg class="form-icon">
+								  <use xlink:href="#edit" />
+								  </svg>
+								  <small>Editar</small>
+								</a>
+							</label>
 						</li>
 						
 						<ul class='child' collapse="obras{{::child2.Id}}Collapse" class="children" ng-if='child2.children' ng-repeat="child3 in child2.children">
 							<li class='inline-elements'>
 								<input id="obra_{{::child3.Id}}" type="checkbox" name="obras" checklist-model="empresa.Obras" checklist-value="child3.Id">
-								<label for="obra_{{::child3.Id}}">{{::child3.Nome}}</label>
+								<label for="obra_{{::child3.Id}}">{{::child3.Nome}}
+									<a class='menu-edit-sub' data-ui-sref="submodel({submodel: 'obras', subid: child3.Id})">
+									  <svg class="form-icon">
+									  <use xlink:href="#edit" />
+									  </svg>
+									  <small>Editar</small>
+									</a>
+								</label>
 							</li>
 						</ul>
 					</ul>

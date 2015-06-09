@@ -44,7 +44,7 @@
 
 		var ctrl = this;
 		var _update = false;
-		var Card = CardService;	
+		var Card = angular.copy(CardService);	
 		
 		$scope.estados = estados;
 		$scope.obra = obra;
@@ -169,7 +169,8 @@
 				templateUrl: "js/views/modals/cenario-cenarioValor.html",
 				controller: "cardModalController",
 				inputs: {
-					card: card
+					card: card,
+					options: ['cenario']
 				}
 			}).then(function(modal) {
 //			    modal.close.then(function(result) {

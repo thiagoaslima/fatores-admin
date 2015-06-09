@@ -113,6 +113,46 @@
 			    this.PadraoObraId = null;
 			    this.TipoObraId = null;
 			    this.EmpresaId = null;-->
+          
+          <!--Cenarios fieldset-->
+    <fieldset>
+      <legend>Cenários e atributos</legend>
+      <div class="form-group">
+        <div class="controles">
+          <div class="inline-elements">
+            <label for="cenarios_search">
+              <svg class="label-icon">
+                <use xlink:href="#search"></use>
+              </svg>
+            </label>
+            <div>
+              <input type="search" placeholder="buscar cenários" id="cenarios_search" ng-model="search.cenarios">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="colunas">
+        
+        <!--Cenarios-->
+        <div class="form-group">
+          <div class='coluna__header'>
+            <label class="label__section" for="AreaAtuacaoId">Cenários</label>
+          </div>
+          <div class="card cenario__{{card.Type}}" ng-click="showModal(card)" ng-if="card.Type === 'cenario'" ng-repeat="card in mediator.Cenarios track by card.Id">
+            <label>{{::card.Nome}}</label>
+          </div>
+        </div>
+        <!--Não selecionados-->
+        <div class="form-group">
+          <div class='coluna__header'>
+            <label class="label__section" for="AreaAtuacaoId">Não selecionados</label>
+          </div>
+          <div class="card cenario__{{card.Type}}" ng-click="showModal(card)" ng-if="card.Type === 'none'" ng-repeat="card in mediator.Cenarios track by card.Id">
+            <label>{{::card.Nome}}</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
 
 
   </form>

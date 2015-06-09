@@ -9,12 +9,12 @@
       
       <div class="modal-body colunas">
           <div>
-              <div class="inline-elements">
+              <div ng-if="options.atributo" class="inline-elements">
                 <input type="radio" id="card_atributo_{{::card.Cenario.Id}}" ng-model="card.Type" value="atributo" />
                 <label for="card_atributo_{{::card.Cenario.Id}}">Atributo</label>
               </div>
               
-              <div class="inline-elements">
+              <div ng-if="options.cenario" class="inline-elements">
                 <input type="radio" id="card_cenario_{{::card.Cenario.Id}}" ng-model="card.Type" value="cenario" />
                 <label for="card_cenario_{{::card.Cenario.Id}}">Cenário</label>
               </div>

@@ -37,7 +37,7 @@
 
 		var ctrl = this;
 		var _update = false;
-		var Card = CardService;		
+		var Card = angular.copy(CardService);		
 
 
 		$scope.tarefa = tarefa;
@@ -129,7 +129,7 @@
 				}
 
 				if (card.Type !== 'none' && card.Type !== 'atributo') {
-					throw new Error('O mesmo cenario ' + card.cenario.Nome + '(' + card.cenario.Id + ') está definido como atributo e como cenário');
+					throw new Error('O mesmo cenario ' + card.Cenario.Nome + '(' + card.Cenario.Id + ') está definido como atributo e como cenário');
 				}
 
 				card.Valores = card.Valores.concat(value);
@@ -156,7 +156,8 @@
 				templateUrl: "js/views/modals/cenario-cenarioValor.html",
 				controller: "cardModalController",
 				inputs: {
-					card: card
+					card: card,
+					options: ['cenario', 'atributo']
 				}
 			}).then(function(modal) {
 //			    modal.close.then(function(result) {
