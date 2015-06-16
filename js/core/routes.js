@@ -63,7 +63,7 @@
 									var service = $injector.get(model + 'Service');
 									var defer = $q.defer();
 
-									if (isNaN(parseInt(id, 10))) {
+									if (id === 'novo' || id === 'nova') {
 										defer.resolve(service.new());
 									} else {
 										$q.when(service.get(id)).then(function (resp) {

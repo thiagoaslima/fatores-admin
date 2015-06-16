@@ -19,7 +19,7 @@
 
 	function ctrl($scope, params, URLS, items, hasProperty, buildHierarchy, sort, filter) {
 
-		var nome = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		var nome = items[0].Nome ? 'Nome' : items[0].RazaoSocial ? 'RazaoSocial' : 'UserName';
 		
 		items = sort(items, nome);
 
@@ -32,7 +32,7 @@
 			items = buildHierarchy(items, prop);
 		}
 		
-		var prop = items[0].RazaoSocial ? 'RazaoSocial' : 'Nome';
+		var prop = items[0].Nome ? 'Nome' : items[0].RazaoSocial ? 'RazaoSocial' : 'UserName';
 		$scope.$watch('filtrarModel', function (value, oldValue) {	
 			if (value !== oldValue) {
 				var obj = {};

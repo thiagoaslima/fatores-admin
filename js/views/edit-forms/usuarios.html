@@ -1,0 +1,108 @@
+<div class="modulo-edicao__topo">
+  <div class="controles">
+    <button class="btn btn-principal" type="button" ng-click="usuarios.gravar()">Gravar</button>
+    <button class="btn" type="button" ng-if="btn.apagar" ng-click="usuarios.delete()">Apagar</button>
+  </div>
+</div>
+
+<div class="modulo-edicao__corpo">
+  <form name="formUsuario" id="formUsuario" novalidate ng-submit="usuarios.gravar()">
+
+
+    <!--Id-->
+
+    <!--Status-->
+    <div class="form-group">
+      <label class="label__section" for="status">Status</label>
+
+      <div class="inline-elements">
+      	<input type="radio" id="status_true" name="status" ng-value="true" ng-model="usuario.Status" /><label for="label_true">Ativa</label>
+      	<input type="radio" id="status_false" name="status" ng-value="false" ng-model="usuario.Status" /><label for="label_false">Inativa</label>
+      </div>
+    </div>
+
+
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" ng-model="usuario.UserName" />
+    </div>
+
+    <!--Email-->
+    <div class="form-group">
+      <label class="label__section" for="email">Email</label>
+      <input type="email" id="email" name="email" ng-model="usuario.Email" />
+    </div>
+    
+    <!--Nome-->
+    <div class="form-group">
+      <label class="label__section" for="password">Senha</label>
+      <input type="password" id="password" name="password" ng-model="usuario.Password" />
+    </div>
+    
+    <!--EmpresasAutorizadas-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="empresas">Empresas Autorizadas</label>
+			</div>
+			<div class='inline-elements' ng-repeat="empresa in empresas">
+				<input id="empresa_{{::empresa.Id}}" type="checkbox" name="empresa" checklist-model="usuario.EmpresasAutorizadas" checklist-value="empresa.Id">
+				<label for="empresa_{{::empresa.Id}}">{{::empresa.RazaoSocial}}</label>
+			</div>
+		</div>
+    
+    <!--Obras-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="obras">Obras Autorizadas</label>
+			</div>
+      
+			<ul class='parent' ng-repeat="obra in obras">
+				<li class='inline-elements'>
+					<collapse-button ng-if="obra.children" scope-prop="obras{{::obra.Id}}Collapse" starts-closed></collapse-button>
+					<input id="obra_{{::obra.Id}}" type="checkbox" name="obras" checklist-model="usuario.ObrasAutorizadas" checklist-value="obra.Id">
+					<label for="obra_{{::obra.Id}}">{{::obra.Nome}}</label>
+				</li>
+				
+				<ul class='child' collapse="obras{{::obra.Id}}Collapse" class="children" ng-if='obra.children' ng-repeat="child1 in obra.children">
+					<li class='inline-elements'>
+						<collapse-button ng-if="child1.children" scope-prop="obras{{::child1.Id}}Collapse" starts-closed></collapse-button>
+						<input id="obra_{{::child1.Id}}" type="checkbox" name="obras" checklist-model="usuario.ObrasAutorizadas" checklist-value="child1.Id">
+						<label for="obra_{{::child1.Id}}">{{::child1.Nome}}</label>
+					</li>
+					
+					<ul class='child' collapse="obras{{::child1.Id}}Collapse" class="children" ng-if='child1.children' ng-repeat="child2 in child1.children">
+						<li class='inline-elements'>
+							<collapse-button ng-if="child2.children" scope-prop="obras{{::child2.Id}}Collapse" starts-closed></collapse-button>
+							<input id="obra_{{::child2.Id}}" type="checkbox" name="obras" checklist-model="usuario.ObrasAutorizadas" checklist-value="child2.Id">
+							<label for="obra_{{::child2.Id}}">{{::child2.Nome}}</label>
+						</li>
+						
+						<ul class='child' collapse="obras{{::child2.Id}}Collapse" class="children" ng-if='child2.children' ng-repeat="child3 in child2.children">
+							<li class='inline-elements'>
+								<input id="obra_{{::child3.Id}}" type="checkbox" name="obras" checklist-model="usuario.ObrasAutorizadas" checklist-value="child3.Id">
+								<label for="obra_{{::child3.Id}}">{{::child3.Nome}}</label>
+							</li>
+						</ul>
+					</ul>
+				</ul>
+			</ul>
+		</div>
+		
+		
+		<!--Tarefas-->
+		<div class="form-group">
+			<div class='inline-elements'>
+				<label class="label__section" for="tarefas">Tarefas Autorizadas</label>
+			</div>
+			
+			<ul class="parent">
+				<li class='inline-elements' ng-repeat="tarefa in tarefas">
+					<input id="tarefa_{{::tarefa.Id}}" type="checkbox" name="tarefas" checklist-model="usuario.TarefasAutorizadas" checklist-value="tarefa.Id">
+					<label for="tarefa_{{::tarefa.Id}}">{{::tarefa.Nome}}</label>
+				</li>
+			</ul>
+		</div>
+    
+  </form>
+</div>

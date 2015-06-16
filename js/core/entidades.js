@@ -110,10 +110,10 @@
 			},
 			{
 				Nome: "Usuários",
-				Alias: "users",
-				Href: "users",
-				UI: false,
-				ListOnSidebar: false,
+				Alias: "usuarios",
+				Href: "usuarios",
+				UI: true,
+				ListOnSidebar: true,
 				Hierarchical: false
 			},
 			{

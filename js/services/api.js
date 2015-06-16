@@ -135,7 +135,7 @@
 		}
 
 		function detalhar(url, id) {
-			var endpoint = DB_URL + url + '/detalhes?ids=' + parseInt(id, 10);
+			var endpoint = DB_URL + url + '/detalhes?ids=' + id;
 
 			return $http({
 				method: 'GET',

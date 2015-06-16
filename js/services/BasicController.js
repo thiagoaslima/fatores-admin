@@ -41,7 +41,7 @@
 				var entidade = array[index];
 				service.query().then(function (resp) {
 					if (resp && resp.length) {
-						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						var name = resp[0].Nome ? 'Nome' : resp[0].RazaoSocial ? 'RazaoSocial' : 'UserName';
 						scope[entidade] = sort(resp, name);	
 					} 
 				});
@@ -61,7 +61,7 @@
 				var entidade = entidades[index];
 				service.query().then(function (resp) {
 					if (resp && resp.length) {
-						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						var name = resp[0].Nome ? 'Nome' : resp[0].RazaoSocial ? 'RazaoSocial' : 'UserName';
 						resp = sort(resp, name);
 						scope[entidade] = buildHierarchy(resp, props[index]);	
 					}
@@ -83,7 +83,7 @@
 				var prop = props[index];
 				service.query().then(function (resp) {
 					if (resp && resp.length) {
-						var name = resp[0].Nome ? 'Nome' : 'RazaoSocial';
+						var name = resp[0].Nome ? 'Nome' : resp[0].RazaoSocial ? 'RazaoSocial' : 'UserName';
 						resp = resp.filter(function (item) {
 							return item[prop] === id;
 						});
